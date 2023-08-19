@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct Anything<Wrapper : UIView>: UIViewRepresentable {
+struct AnyUIView<Wrapper : UIView>: UIViewRepresentable {
 
     var makeView: () -> Wrapper
     var update: (Wrapper, Context) -> Void
