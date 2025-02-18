@@ -31,6 +31,10 @@ struct SearchBarView: UIViewRepresentable {
                       context: Context) {
         uiView.text = text
     }
+    
+//    func onChanged(value: String) -> Void {
+//        <#function body#>
+//    }
 }
 
 
@@ -46,3 +50,4 @@ class UISearchBarCoordinator: NSObject, UISearchBarDelegate {
         text = searchText
     }
 }
+

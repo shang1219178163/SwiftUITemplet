@@ -10,24 +10,27 @@ import SwiftUI
 struct ContentView: View {
     @State private var path = NavigationPath() // 管理路径的状态
 
-    //    @Binding var text: String;
+//    @Binding private var text: String;
+    @State private var text: String = ""
 
     var body: some View {
         NavigationStack(path: $path) {
-            VStack {
-                Button(
-                    "Go to Details"
-                ) {
-//                    Router(navigator: SwiftUINavigator(path: $path)).to(DetailView())
-                    
-                    let navigator = SwiftUINavigator(path: $path)
-                                   navigator.push(AnyView(DetailView()))
-                    
+            VStack(alignment: .leading, content: {
+                Button("Router导航") {
+                    let router = Router(navigator: SwiftUINavigator(path: $path));
+                    router.to(AnyView(DetailView()))
                 }
                 
-                //            SearchBarView(text: $text,
-                //                          placeholder: "搜索"
-                //            )
+                Button( "SwiftUINavigator 导航") {
+                    let navigator = SwiftUINavigator(path: $path)
+                    navigator.push(AnyView(DetailView()))
+                }
+                
+                SearchBarView(text: $text,
+                              placeholder: "搜索"
+                )
+                Text("输入框:\($text.wrappedValue)")
+                
                 Image(
                     systemName: "globe"
                 )
@@ -94,13 +97,13 @@ struct ContentView: View {
                         
                     })
                 }
-//                Button {
-//                    print("button")
-//                } label: {
-//                    return Text("Button")
-//                }
+                Button {
+                    DDLog("button")
+                } label: {
+                    return Text("Button")
+                }
                 
-            }
+            })
             .padding()
             .navigationDestination(for: HashableAnyView.self) { view in
                view.view
@@ -114,7 +117,6 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    @Binding var text: String
 
     static var previews: some View {
         ContentView()
