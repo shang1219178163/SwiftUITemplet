@@ -8,8 +8,28 @@
 import SwiftUI
 
 struct FeedView: View {
+    @State private var path = NavigationPath() // 管理路径的状态
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack(path: $path) {
+            VStack(alignment: .leading, content: {
+     
+        
+                Button {
+                    DDLog("button")
+                } label: {
+                    return Text("Button")
+                }
+                
+            })
+            .padding()
+            .navigationDestination(for: HashableAnyView.self) { view in
+               view.view
+           }
+            .navigationTitle(
+                "\(clsName)"
+            )
+           }
     }
 }
 

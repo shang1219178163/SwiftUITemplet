@@ -11,6 +11,11 @@ import SwiftUI
 
 extension View {
     
+    var clsName: String {
+        var clsName = String(describing: Self.self)
+        return clsName;
+    }
+
     /// API 兼容
     func scrollDisabledNew() -> some View {
         if #available(iOS 16.0, *) {

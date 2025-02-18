@@ -8,8 +8,28 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var path = NavigationPath() // 管理路径的状态
+
     var body: some View {
-        Text("ProfileView")
+        NavigationStack(path: $path) {
+            VStack(alignment: .leading, content: {
+       
+        
+                Button {
+                    DDLog("button")
+                } label: {
+                    return Text("Button")
+                }
+                
+            })
+            .padding()
+            .navigationDestination(for: HashableAnyView.self) { view in
+               view.view
+           }
+            .navigationTitle(
+                "\(clsName)"
+            )
+           }
     }
 }
 
