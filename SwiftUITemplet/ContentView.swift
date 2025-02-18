@@ -18,9 +18,11 @@ struct ContentView: View {
                 Button(
                     "Go to Details"
                 ) {
-                    path.append(
-                        "DetailView"
-                    ) // 推入导航栈
+//                    Router(navigator: SwiftUINavigator(path: $path)).to(DetailView())
+                    
+                    let navigator = SwiftUINavigator(path: $path)
+                                   navigator.push(AnyView(DetailView()))
+                    
                 }
                 
                 //            SearchBarView(text: $text,
@@ -92,27 +94,17 @@ struct ContentView: View {
                         
                     })
                 }
-                Button {
-                    print(
-                        "button"
-                    )
-                } label: {
-                    return Text(
-                        "Button"
-                    )
-                }
+//                Button {
+//                    print("button")
+//                } label: {
+//                    return Text("Button")
+//                }
                 
             }
             .padding()
-            .navigationDestination(
-                for: String.self
-            ) { value in
-                if value == "DetailView" {
-                    Text(
-                        "This is the Detail View"
-                    )
-                }
-            }
+            .navigationDestination(for: HashableAnyView.self) { view in
+               view.view
+           }
             .navigationTitle(
                 "Main View"
             )

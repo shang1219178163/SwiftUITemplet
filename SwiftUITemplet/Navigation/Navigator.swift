@@ -79,7 +79,7 @@ struct SwiftUINavigator: Navigator {
 
 // 定义一个包装类型，包装 AnyView，并且遵循 Hashable 协议
 struct HashableAnyView: Hashable {
-    private var view: AnyView
+    var view: AnyView
 
     // 初始化方法，用于包装任意的 View
     init<V: View>(view: V) {
@@ -107,6 +107,10 @@ class Router {
     }
 
     func to(_ view: AnyView, animated: Bool = true) {
+//        if view is AnyView {
+//            navigator.push(view as! AnyView, animated: animated)
+//            return
+//        }
         navigator.push(view, animated: animated)
     }
 
