@@ -8,26 +8,116 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @Binding var text: String
-    
+    @State private var path = NavigationPath() // 管理路径的状态
+
+    //    @Binding var text: String;
+
     var body: some View {
-        VStack {
-//            SearchBarView(text: $text,
-//                          placeholder: "搜索"
-//            )
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Button {
-                print("button")
-            } label: {
-                return Text("Button")
+        NavigationStack(path: $path) {
+            VStack {
+                Button(
+                    "Go to Details"
+                ) {
+                    path.append(
+                        "DetailView"
+                    ) // 推入导航栈
+                }
+                
+                //            SearchBarView(text: $text,
+                //                          placeholder: "搜索"
+                //            )
+                Image(
+                    systemName: "globe"
+                )
+                .imageScale(
+                    .large
+                )
+                .foregroundColor(
+                    .accentColor
+                )
+                List(
+                    0 ..< 3
+                ) { item in
+                    VStack(alignment: .leading,
+                           content: {
+                        HStack(content: {
+                            Image(
+                                "doctor"
+                            )
+                            .resizable()
+                            .frame(
+                                width: 48,
+                                height: 48
+                            )
+                            
+                            VStack(alignment: .leading,
+                                   content:  {
+                                HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
+                                       content: {
+                                    Text(
+                                        "title"
+                                    )
+                                    .font(
+                                        .title2
+                                    )
+                                    Spacer()
+                                    Text(
+                                        "02-02"
+                                    )
+                                    .font(
+                                        .title3
+                                    )
+                                    
+                                })
+                                HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
+                                       content: {
+                                    Text(
+                                        "subtitle"
+                                    )
+                                    .font(
+                                        .title2
+                                    )
+                                    Spacer()
+                                    Text(
+                                        "备注"
+                                    )
+                                    .font(
+                                        .title3
+                                    )
+                                    
+                                })
+                            })
+                            
+                        })
+                        
+                    })
+                }
+                Button {
+                    print(
+                        "button"
+                    )
+                } label: {
+                    return Text(
+                        "Button"
+                    )
+                }
+                
             }
-
-        }
-        .padding()
-
+            .padding()
+            .navigationDestination(
+                for: String.self
+            ) { value in
+                if value == "DetailView" {
+                    Text(
+                        "This is the Detail View"
+                    )
+                }
+            }
+            .navigationTitle(
+                "Main View"
+            )
+           }
+        
     }
 }
 
