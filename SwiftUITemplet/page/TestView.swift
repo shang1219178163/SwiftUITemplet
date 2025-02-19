@@ -30,24 +30,17 @@ struct TestView: View {
                 )
                 Text("输入框:\($text.wrappedValue)")
                 
-                Image(
-                    systemName: "globe"
-                )
-                .imageScale(
-                    .large
-                )
-                .foregroundColor(
-                    .accentColor
-                )
+                Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundColor(.accentColor)
+                
                 List(
                     0 ..< 3
                 ) { item in
                     VStack(alignment: .leading,
                            content: {
                         HStack(content: {
-                            Image(
-                                "doctor"
-                            )
+                            Image("doctor")
                             .resizable()
                             .frame(
                                 width: 48,
@@ -58,36 +51,20 @@ struct TestView: View {
                                    content:  {
                                 HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
                                        content: {
-                                    Text(
-                                        "title"
-                                    )
-                                    .font(
-                                        .title2
-                                    )
+                                    Text("title")
+                                        .font(.title2)
                                     Spacer()
-                                    Text(
-                                        "02-02"
-                                    )
-                                    .font(
-                                        .title3
-                                    )
+                                    Text("02-02")
+                                        .font(.title3)
                                     
                                 })
                                 HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
                                        content: {
-                                    Text(
-                                        "subtitle"
-                                    )
-                                    .font(
-                                        .title2
-                                    )
+                                    Text("subtitle")
+                                        .font(.title2)
                                     Spacer()
-                                    Text(
-                                        "备注"
-                                    )
-                                    .font(
-                                        .title3
-                                    )
+                                    Text("备注")
+                                        .font(.title3)
                                     
                                 })
                             })

@@ -44,6 +44,16 @@
 		14E4697A2D6577C000B7372F /* array_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469792D6577C000B7372F /* array_ext.swift */; };
 		14E4697D2D6592F900B7372F /* BBSwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14E4697C2D6592F900B7372F /* BBSwiftUIKit */; };
 		14E4697F2D65931200B7372F /* TableViewExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4697E2D65931200B7372F /* TableViewExample.swift */; };
+		14E469812D65AF8F00B7372F /* ComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469802D65AF8F00B7372F /* ComponentView.swift */; };
+		14E469832D65C34E00B7372F /* LoginBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469822D65C34E00B7372F /* LoginBoxView.swift */; };
+		14E469872D65C80B00B7372F /* AnimatePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469862D65C80A00B7372F /* AnimatePageView.swift */; };
+		14E469892D65CCD800B7372F /* double_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469882D65CCD800B7372F /* double_ext.swift */; };
+		14E4698B2D65CF8E00B7372F /* GestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4698A2D65CF8E00B7372F /* GestureView.swift */; };
+		14E4698E2D65D18900B7372F /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4698D2D65D18900B7372F /* NavView.swift */; };
+		14E469902D65D44100B7372F /* DynamicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4698F2D65D44100B7372F /* DynamicContentView.swift */; };
+		14E469922D65DBC200B7372F /* CustomeModifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469912D65DBC200B7372F /* CustomeModifierView.swift */; };
+		14E469942D65E15D00B7372F /* GeometryReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469932D65E15D00B7372F /* GeometryReaderView.swift */; };
+		14E469962D65E6D400B7372F /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469952D65E6D400B7372F /* RoundedCorner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +86,16 @@
 		14E469772D65759800B7372F /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		14E469792D6577C000B7372F /* array_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = array_ext.swift; sourceTree = "<group>"; };
 		14E4697E2D65931200B7372F /* TableViewExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewExample.swift; sourceTree = "<group>"; };
+		14E469802D65AF8F00B7372F /* ComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentView.swift; sourceTree = "<group>"; };
+		14E469822D65C34E00B7372F /* LoginBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBoxView.swift; sourceTree = "<group>"; };
+		14E469862D65C80A00B7372F /* AnimatePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatePageView.swift; sourceTree = "<group>"; };
+		14E469882D65CCD800B7372F /* double_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = double_ext.swift; sourceTree = "<group>"; };
+		14E4698A2D65CF8E00B7372F /* GestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureView.swift; sourceTree = "<group>"; };
+		14E4698D2D65D18900B7372F /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
+		14E4698F2D65D44100B7372F /* DynamicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicContentView.swift; sourceTree = "<group>"; };
+		14E469912D65DBC200B7372F /* CustomeModifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeModifierView.swift; sourceTree = "<group>"; };
+		14E469932D65E15D00B7372F /* GeometryReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryReaderView.swift; sourceTree = "<group>"; };
+		14E469952D65E6D400B7372F /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +169,8 @@
 				142CB9462A90CD1A00CBD9F4 /* AnyUIView.swift */,
 				142CB9492A90CD6A00CBD9F4 /* SearchBarView.swift */,
 				14E469772D65759800B7372F /* RefreshableScrollView.swift */,
+				14E469822D65C34E00B7372F /* LoginBoxView.swift */,
+				14E469952D65E6D400B7372F /* RoundedCorner.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,6 +181,7 @@
 				1477664E2D64737200458842 /* color_ext.swift */,
 				147766502D6473EA00458842 /* view_ext.swift */,
 				14E469792D6577C000B7372F /* array_ext.swift */,
+				14E469882D65CCD800B7372F /* double_ext.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -186,6 +209,7 @@
 		14780A7E2D642D9600F8C62D /* page */ = {
 			isa = PBXGroup;
 			children = (
+				14E4698C2D65D10000B7372F /* Official */,
 				14E4697E2D65931200B7372F /* TableViewExample.swift */,
 				14780A7C2D642D8200F8C62D /* HomeView.swift */,
 				14780A7F2D642DA800F8C62D /* FeedView.swift */,
@@ -212,6 +236,20 @@
 			children = (
 			);
 			path = Vender;
+			sourceTree = "<group>";
+		};
+		14E4698C2D65D10000B7372F /* Official */ = {
+			isa = PBXGroup;
+			children = (
+				14E469862D65C80A00B7372F /* AnimatePageView.swift */,
+				14E469802D65AF8F00B7372F /* ComponentView.swift */,
+				14E4698A2D65CF8E00B7372F /* GestureView.swift */,
+				14E4698D2D65D18900B7372F /* NavView.swift */,
+				14E4698F2D65D44100B7372F /* DynamicContentView.swift */,
+				14E469912D65DBC200B7372F /* CustomeModifierView.swift */,
+				14E469932D65E15D00B7372F /* GeometryReaderView.swift */,
+			);
+			path = Official;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,27 +347,37 @@
 			files = (
 				14780A842D642DE400F8C62D /* UnknowView.swift in Sources */,
 				14780A862D6430C100F8C62D /* ProfileView.swift in Sources */,
+				14E469922D65DBC200B7372F /* CustomeModifierView.swift in Sources */,
 				147766862D64914A00458842 /* TestView.swift in Sources */,
 				14780A802D642DA800F8C62D /* FeedView.swift in Sources */,
 				14E4697F2D65931200B7372F /* TableViewExample.swift in Sources */,
+				14E469832D65C34E00B7372F /* LoginBoxView.swift in Sources */,
 				14780A7D2D642D8200F8C62D /* HomeView.swift in Sources */,
 				14E4697A2D6577C000B7372F /* array_ext.swift in Sources */,
+				14E469942D65E15D00B7372F /* GeometryReaderView.swift in Sources */,
 				147766512D6473EA00458842 /* view_ext.swift in Sources */,
 				14780A7B2D642B1900F8C62D /* MyCoordinator.swift in Sources */,
 				14C825D62D5AF3D700A2A347 /* OCRManager.swift in Sources */,
 				14780A892D64419700F8C62D /* Navigator.swift in Sources */,
 				14780A782D6427E000F8C62D /* NavigationContext.swift in Sources */,
 				142CB94A2A90CD6A00CBD9F4 /* SearchBarView.swift in Sources */,
+				14E469902D65D44100B7372F /* DynamicContentView.swift in Sources */,
+				14E4698B2D65CF8E00B7372F /* GestureView.swift in Sources */,
 				147766802D647C4000458842 /* UserData.swift in Sources */,
 				14D7EBFF2AA963A900B4926A /* MemberLookupDemo.swift in Sources */,
 				147766822D647EA000458842 /* DetailView.swift in Sources */,
+				14E4698E2D65D18900B7372F /* NavView.swift in Sources */,
 				14E469782D65759800B7372F /* RefreshableScrollView.swift in Sources */,
 				142CB93B2A90CCF200CBD9F4 /* ContentView.swift in Sources */,
 				142CB9392A90CCF200CBD9F4 /* SwiftUITempletApp.swift in Sources */,
 				1477664F2D64737200458842 /* color_ext.swift in Sources */,
+				14E469892D65CCD800B7372F /* double_ext.swift in Sources */,
+				14E469962D65E6D400B7372F /* RoundedCorner.swift in Sources */,
+				14E469812D65AF8F00B7372F /* ComponentView.swift in Sources */,
 				1477667C2D647C4000458842 /* Data.swift in Sources */,
 				1477667F2D647C4000458842 /* Profile.swift in Sources */,
 				147766842D64902500458842 /* log.swift in Sources */,
+				14E469872D65C80B00B7372F /* AnimatePageView.swift in Sources */,
 				142CB9472A90CD1A00CBD9F4 /* AnyUIView.swift in Sources */,
 				147766882D64922900458842 /* TabbarView.swift in Sources */,
 			);
