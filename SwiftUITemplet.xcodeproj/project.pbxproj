@@ -31,6 +31,19 @@
 		14780A892D64419700F8C62D /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14780A882D64419700F8C62D /* Navigator.swift */; };
 		14C825D62D5AF3D700A2A347 /* OCRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C825D52D5AF3D700A2A347 /* OCRManager.swift */; };
 		14D7EBFF2AA963A900B4926A /* MemberLookupDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D7EBFE2AA963A900B4926A /* MemberLookupDemo.swift */; };
+		14E469562D65682E00B7372F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 14E469552D65682E00B7372F /* Alamofire */; };
+		14E4695B2D656A2F00B7372F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 14E4695A2D656A2F00B7372F /* SDWebImageSwiftUI */; };
+		14E4695E2D656CE600B7372F /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 14E4695D2D656CE600B7372F /* SwiftUIIntrospect */; };
+		14E469622D656CE600B7372F /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 14E469612D656CE600B7372F /* SwiftUIIntrospect-Static */; };
+		14E469652D656D0E00B7372F /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 14E469642D656D0E00B7372F /* SwiftUIX */; };
+		14E469682D65705700B7372F /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 14E469672D65705700B7372F /* DGCharts */; };
+		14E4696D2D6570CF00B7372F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 14E4696C2D6570CF00B7372F /* SwiftDate */; };
+		14E469702D6571B400B7372F /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 14E4696F2D6571B400B7372F /* ZIPFoundation */; };
+		14E469732D65721F00B7372F /* MJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 14E469722D65721F00B7372F /* MJRefresh */; };
+		14E469782D65759800B7372F /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469772D65759800B7372F /* RefreshableScrollView.swift */; };
+		14E4697A2D6577C000B7372F /* array_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469792D6577C000B7372F /* array_ext.swift */; };
+		14E4697D2D6592F900B7372F /* BBSwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14E4697C2D6592F900B7372F /* BBSwiftUIKit */; };
+		14E4697F2D65931200B7372F /* TableViewExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4697E2D65931200B7372F /* TableViewExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +72,10 @@
 		14780A882D64419700F8C62D /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		14C825D52D5AF3D700A2A347 /* OCRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRManager.swift; sourceTree = "<group>"; };
 		14D7EBFE2AA963A900B4926A /* MemberLookupDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberLookupDemo.swift; sourceTree = "<group>"; };
+		14E469762D6572A900B7372F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		14E469772D65759800B7372F /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
+		14E469792D6577C000B7372F /* array_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = array_ext.swift; sourceTree = "<group>"; };
+		14E4697E2D65931200B7372F /* TableViewExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +83,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14E469682D65705700B7372F /* DGCharts in Frameworks */,
+				14E469702D6571B400B7372F /* ZIPFoundation in Frameworks */,
+				14E469652D656D0E00B7372F /* SwiftUIX in Frameworks */,
+				14E4697D2D6592F900B7372F /* BBSwiftUIKit in Frameworks */,
+				14E4696D2D6570CF00B7372F /* SwiftDate in Frameworks */,
+				14E4695B2D656A2F00B7372F /* SDWebImageSwiftUI in Frameworks */,
+				14E469562D65682E00B7372F /* Alamofire in Frameworks */,
+				14E469732D65721F00B7372F /* MJRefresh in Frameworks */,
+				14E4695E2D656CE600B7372F /* SwiftUIIntrospect in Frameworks */,
+				14E469622D656CE600B7372F /* SwiftUIIntrospect-Static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,9 +126,11 @@
 				142CB9482A90CD3B00CBD9F4 /* View */,
 				142CB9382A90CCF200CBD9F4 /* SwiftUITempletApp.swift */,
 				142CB93A2A90CCF200CBD9F4 /* ContentView.swift */,
+				14E469742D65723E00B7372F /* Vender */,
 				142CB93C2A90CCF400CBD9F4 /* Assets.xcassets */,
 				142CB93E2A90CCF400CBD9F4 /* Preview Content */,
 				147766832D64902500458842 /* log.swift */,
+				14E469762D6572A900B7372F /* Bridging-Header.h */,
 			);
 			path = SwiftUITemplet;
 			sourceTree = "<group>";
@@ -119,6 +148,7 @@
 			children = (
 				142CB9462A90CD1A00CBD9F4 /* AnyUIView.swift */,
 				142CB9492A90CD6A00CBD9F4 /* SearchBarView.swift */,
+				14E469772D65759800B7372F /* RefreshableScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -128,6 +158,7 @@
 			children = (
 				1477664E2D64737200458842 /* color_ext.swift */,
 				147766502D6473EA00458842 /* view_ext.swift */,
+				14E469792D6577C000B7372F /* array_ext.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -155,6 +186,7 @@
 		14780A7E2D642D9600F8C62D /* page */ = {
 			isa = PBXGroup;
 			children = (
+				14E4697E2D65931200B7372F /* TableViewExample.swift */,
 				14780A7C2D642D8200F8C62D /* HomeView.swift */,
 				14780A7F2D642DA800F8C62D /* FeedView.swift */,
 				14780A832D642DE400F8C62D /* UnknowView.swift */,
@@ -175,6 +207,13 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		14E469742D65723E00B7372F /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -191,6 +230,18 @@
 			dependencies = (
 			);
 			name = SwiftUITemplet;
+			packageProductDependencies = (
+				14E469552D65682E00B7372F /* Alamofire */,
+				14E4695A2D656A2F00B7372F /* SDWebImageSwiftUI */,
+				14E4695D2D656CE600B7372F /* SwiftUIIntrospect */,
+				14E469612D656CE600B7372F /* SwiftUIIntrospect-Static */,
+				14E469642D656D0E00B7372F /* SwiftUIX */,
+				14E469672D65705700B7372F /* DGCharts */,
+				14E4696C2D6570CF00B7372F /* SwiftDate */,
+				14E4696F2D6571B400B7372F /* ZIPFoundation */,
+				14E469722D65721F00B7372F /* MJRefresh */,
+				14E4697C2D6592F900B7372F /* BBSwiftUIKit */,
+			);
 			productName = SwiftUITemplet;
 			productReference = 142CB9352A90CCF200CBD9F4 /* SwiftUITemplet.app */;
 			productType = "com.apple.product-type.application";
@@ -219,6 +270,17 @@
 				Base,
 			);
 			mainGroup = 142CB92C2A90CCF200CBD9F4;
+			packageReferences = (
+				14E469542D65682E00B7372F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				14E469592D656A2F00B7372F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				14E4695C2D656CE600B7372F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				14E469632D656D0E00B7372F /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				14E469662D65705700B7372F /* XCRemoteSwiftPackageReference "Charts" */,
+				14E4696B2D6570CF00B7372F /* XCRemoteSwiftPackageReference "SwiftDate" */,
+				14E4696E2D6571B400B7372F /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				14E469712D65721F00B7372F /* XCRemoteSwiftPackageReference "MJRefresh" */,
+				14E4697B2D6592F900B7372F /* XCRemoteSwiftPackageReference "BBSwiftUIKit" */,
+			);
 			productRefGroup = 142CB9362A90CCF200CBD9F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -249,7 +311,9 @@
 				14780A862D6430C100F8C62D /* ProfileView.swift in Sources */,
 				147766862D64914A00458842 /* TestView.swift in Sources */,
 				14780A802D642DA800F8C62D /* FeedView.swift in Sources */,
+				14E4697F2D65931200B7372F /* TableViewExample.swift in Sources */,
 				14780A7D2D642D8200F8C62D /* HomeView.swift in Sources */,
+				14E4697A2D6577C000B7372F /* array_ext.swift in Sources */,
 				147766512D6473EA00458842 /* view_ext.swift in Sources */,
 				14780A7B2D642B1900F8C62D /* MyCoordinator.swift in Sources */,
 				14C825D62D5AF3D700A2A347 /* OCRManager.swift in Sources */,
@@ -259,6 +323,7 @@
 				147766802D647C4000458842 /* UserData.swift in Sources */,
 				14D7EBFF2AA963A900B4926A /* MemberLookupDemo.swift in Sources */,
 				147766822D647EA000458842 /* DetailView.swift in Sources */,
+				14E469782D65759800B7372F /* RefreshableScrollView.swift in Sources */,
 				142CB93B2A90CCF200CBD9F4 /* ContentView.swift in Sources */,
 				142CB9392A90CCF200CBD9F4 /* SwiftUITempletApp.swift in Sources */,
 				1477664F2D64737200458842 /* color_ext.swift in Sources */,
@@ -329,6 +394,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftUITemplet/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -382,6 +448,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftUITemplet/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -473,6 +540,134 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		14E469542D65682E00B7372F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		14E469592D656A2F00B7372F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+		14E4695C2D656CE600B7372F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
+		14E469632D656D0E00B7372F /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.3;
+			};
+		};
+		14E469662D65705700B7372F /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+		14E4696B2D6570CF00B7372F /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		14E4696E2D6571B400B7372F /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
+		14E469712D65721F00B7372F /* XCRemoteSwiftPackageReference "MJRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoderMJLee/MJRefresh";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.7.9;
+			};
+		};
+		14E4697B2D6592F900B7372F /* XCRemoteSwiftPackageReference "BBSwiftUIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Silence-GitHub/BBSwiftUIKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		14E469552D65682E00B7372F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E469542D65682E00B7372F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		14E4695A2D656A2F00B7372F /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E469592D656A2F00B7372F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		14E4695D2D656CE600B7372F /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E4695C2D656CE600B7372F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = SwiftUIIntrospect;
+		};
+		14E469612D656CE600B7372F /* SwiftUIIntrospect-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E4695C2D656CE600B7372F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = "SwiftUIIntrospect-Static";
+		};
+		14E469642D656D0E00B7372F /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E469632D656D0E00B7372F /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+		14E469672D65705700B7372F /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E469662D65705700B7372F /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		14E4696C2D6570CF00B7372F /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E4696B2D6570CF00B7372F /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
+		14E4696F2D6571B400B7372F /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E4696E2D6571B400B7372F /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+		14E469722D65721F00B7372F /* MJRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E469712D65721F00B7372F /* XCRemoteSwiftPackageReference "MJRefresh" */;
+			productName = MJRefresh;
+		};
+		14E4697C2D6592F900B7372F /* BBSwiftUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14E4697B2D6592F900B7372F /* XCRemoteSwiftPackageReference "BBSwiftUIKit" */;
+			productName = BBSwiftUIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 142CB92D2A90CCF200CBD9F4 /* Project object */;
 }
