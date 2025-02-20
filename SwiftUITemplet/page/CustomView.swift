@@ -16,8 +16,9 @@ struct CustomView: View {
     }
     
     @State private var imageNames = AppResource.image.imageNames
+    @State private var imageUrls = AppResource.image.urls
 
-    let columns = [GridItem(.adaptive(minimum: 100))] // 每个元素的最小宽度
+    let columns = Array(repeating: GridItem(.flexible()), count: 4) // 每个元素的最小宽度
 
     
     var body: some View {
@@ -25,16 +26,17 @@ struct CustomView: View {
             ScrollView(.vertical, showsIndicators: true) {
                 Text("LazyVGrid")
                     .font(.title)
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(imageNames, id: \.self) { e in
-                        VStack {
-                            Image(e)
-                                .resizable()
-                                .scaledToFit()
-                        }
-                    }
-                }
-                .padding()
+
+//                NNetImageGrid
+//                    .padding()
+//                    .border(Color.black)
+                
+                // 使用封装的九宫格组件
+                ImageGridView(images: imageUrls, onTap: { index in
+                    DDLog("ImageGridView: \(index)")
+                })
+                    .border(Color.black)
+
                 
                 Text("RoundedCorner")
                     .font(.title)
@@ -69,9 +71,42 @@ struct CustomView: View {
             )
         }
     }
+    
+    
+    var NNetImageGrid: some View {
+        
+//        LazyVGrid(columns: columns, spacing: 10) {
+//            ForEach(imageNames, id: \.self) { e in
+//                VStack {
+//                    Image(e)
+//                        .resizable()
+//                        .scaledToFit()
+//                }
+//            }
+//        }
+        
+        LazyVGrid(columns: columns, spacing: 10) {
+            ForEach(imageUrls, id: \.self) { e in
+                AsyncImage(url: URL(string: e)) { image in
+                    image
+                        .resizable()
+//                        .scaledToFit()
+                        .scaledToFill()
+                        .cornerRadius(8)
+                    
+                } placeholder: {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                }
+            }
+        }
+    }
 }
 
 #Preview {
     CustomView()
 }
+
+
+
 
