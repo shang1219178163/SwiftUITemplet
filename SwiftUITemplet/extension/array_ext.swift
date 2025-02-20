@@ -11,14 +11,10 @@ import SwiftUI
 
 extension Array {
 
-//    static func generate(_ length: Int, generator: ((Int) -> Element)? = nil) -> List<Element> {
-//        var items = [0...length];
-//        if generator == nil {
-//            return items;
-//        }
-//        return items.map { v in
-//            generate(v)
-//        }
-//    }
+    /// 快速生成一个数组(step代表步长)
+    init(count: Int, generator: @escaping ((Int) -> Element)) {
+        self = (0..<count).map(generator)
+    }
+    
  
 }

@@ -5,14 +5,15 @@
 //  Created by Bin Shang on 2025/2/20.
 //
 
-import SwiftUI
+public extension String {
 
-struct String_ext: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    static func * (lhs: String, rhs: Int) -> String {
+        guard rhs > 0 else { return "" }
+        return String(repeating: lhs, count: rhs)
     }
-}
-
-#Preview {
-    String_ext()
+      
+    static func *= (lhs: inout String, rhs: Int) -> String {
+        guard rhs > 0 else { return "" }
+        return String(repeating: lhs, count: rhs)
+    }
 }

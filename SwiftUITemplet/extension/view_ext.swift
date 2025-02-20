@@ -12,7 +12,7 @@ import SwiftUI
 extension View {
     
     var clsName: String {
-        var clsName = String(describing: Self.self)
+        let clsName = String(describing: Self.self)
         return clsName;
     }
 
