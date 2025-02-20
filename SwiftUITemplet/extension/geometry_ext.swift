@@ -28,3 +28,13 @@ extension CGFloat {
  
 }
 
+
+extension CGRect {
+
+    /// 转字符串
+    func toString(_ fixed: Int = 2) -> String {
+        return "(\(self.minX.toString(fixed)), \(self.minY.toString(fixed)), \((self.maxX - self.minX).toString(fixed)), \((self.maxY - self.minY).toString(fixed)))";
+    }
+ 
+}
+
