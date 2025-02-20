@@ -9,24 +9,29 @@ import SwiftUI
 
 struct DetailView: View {
     @State private var path = NavigationPath() // 管理路径的状态
+    
+//    init(path: NavigationPath = NavigationPath()) {
+//        self.path = path
+//    }
 
     var body: some View {
         NavigationStack(path: $path) {
             VStack(alignment: .leading, content: {
                 Button("Router导航") {
                     let router = Router(navigator: SwiftUINavigator(path: $path));
-                    router.to(AnyView(DetailView()))
+                    router.to(AnyView(TestView()))
                 }
                 
                 Button( "SwiftUINavigator 导航") {
                     let navigator = SwiftUINavigator(path: $path)
-                    navigator.push(AnyView(DetailView()))
+                    navigator.push(AnyView(TestView()))
                 }
         
                 Button {
                     DDLog("button")
+                    path.append(HashableAnyView(view: TestView()))
                 } label: {
-                    return Text("Button")
+                    Text("Button")
                 }
                 
             })

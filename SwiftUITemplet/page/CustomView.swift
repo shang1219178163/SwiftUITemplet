@@ -17,6 +17,7 @@ struct CustomView: View {
     
     @State private var imageNames = AppResource.image.imageNames
     @State private var imageUrls = AppResource.image.urls
+    @State private var picture: UIImage?
 
     let columns = Array(repeating: GridItem(.flexible()), count: 4) // 每个元素的最小宽度
 
@@ -24,9 +25,24 @@ struct CustomView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ScrollView(.vertical, showsIndicators: true) {
-                Text("LazyVGrid")
-                    .font(.title)
-
+               
+//                VStack {
+//                      HStack {
+//                          Spacer()
+//                          NavigationLink("Get Picture", value: "Open Picker")
+//                      }.navigationDestination(for: String.self, destination: { _ in
+//                          ImagePicker(path: $path, picture: $picture)
+//                      })
+//                      Image(uiImage: picture ?? UIImage(named: "nopicture")!)
+//                          .resizable()
+//                          .scaledToFit()
+//                          .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+//                          .clipped()
+//                      Spacer()
+//                  }.padding()
+   
+           
+                
 //                NNetImageGrid
 //                    .padding()
 //                    .border(Color.black)

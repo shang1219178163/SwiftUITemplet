@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-extension View {
+public extension View {
     
     var clsName: String {
         let clsName = String(describing: Self.self)
