@@ -9,7 +9,8 @@ import SwiftUI
 
 /// 手势
 struct GestureView: View {
-    @State private var path = NavigationPath() // 管理路径的状态
+       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
     
     // 1. Tap Gesture
     @State private var tapCount = 0
@@ -27,7 +28,7 @@ struct GestureView: View {
     @State private var rotation: Angle = .zero
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navManager.path) {
             VStack(alignment: .leading, spacing: 10, content: {
                 // 1. Tap Gesture 示例：计数点击次数
                 VStack {

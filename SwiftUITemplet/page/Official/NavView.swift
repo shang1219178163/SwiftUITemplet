@@ -9,7 +9,8 @@ import SwiftUI
 
 /// 页面导航
 struct NavView: View {
-    @State private var path = NavigationPath() // 管理路径的状态
+       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
     
     // 1. NavigationView 示例状态
     @State private var isNavigationActive = false
@@ -25,7 +26,7 @@ struct NavView: View {
     @State private var isPopoverPresented = false
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navManager.path) {
             VStack(alignment: .leading, spacing: 16, content: {
                
                 
@@ -78,6 +79,7 @@ struct NavView: View {
                  }
                  .frame(height: 200)
                 
+                Text("Tab \(selectedTab)")
                 
                  // 3. Sheet 示例：模态视图弹出
                  Button("Show Modal Sheet") {

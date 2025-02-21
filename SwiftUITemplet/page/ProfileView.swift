@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State private var path = NavigationPath() // 管理路径的状态
+       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navManager.path) {
             VStack(alignment: .leading, content: {
        
         

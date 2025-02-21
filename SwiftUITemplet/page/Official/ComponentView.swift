@@ -9,7 +9,8 @@ import SwiftUI
 
 /// 基础组件
 struct ComponentView: View {
-    @State private var path = NavigationPath() // 管理路径的状态
+       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
 
     @State private var username: String = ""
     @State private var password: String = ""
@@ -26,7 +27,7 @@ struct ComponentView: View {
     
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navManager.path) {
             
             // ScrollView
             ScrollView(.vertical, showsIndicators: true) {

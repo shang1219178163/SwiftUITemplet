@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct FeedView: View {
-    @State private var path = NavigationPath() // 管理路径的状态
+       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
 
     @State private var data: [String] = []
     @State private var isLoading = false
@@ -21,7 +22,7 @@ struct FeedView: View {
     @State private var isLoadingMore = false  // 加载状态
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navManager.path) {
             RefreshableScrollViewNew(
                 onRefresh: onRefresh,
                 onLoad: onLoad

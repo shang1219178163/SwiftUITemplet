@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct DynamicContentView: View {
-    @State private var path = NavigationPath() // 管理路径的状态
+       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
     
     // 1. 列表数据源
     let items = ["Apple", "Banana", "Orange", "Grapes", "Mango"]
@@ -21,7 +22,7 @@ struct DynamicContentView: View {
       
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navManager.path) {
 //            ScrollView(.vertical, showsIndicators: true) {
                 
                 VStack(alignment: .leading, spacing: 10, content: {
