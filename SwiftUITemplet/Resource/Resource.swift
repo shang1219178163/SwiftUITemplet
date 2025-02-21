@@ -19,7 +19,7 @@ class RImage{
      static let shared = RImage()
      private init() {}
     
-    let imageNames = [
+    let imageNames: [String] = [
         "IMG_4120",
         "IMG_3736",
         "IMG_3892",
@@ -35,7 +35,7 @@ class RImage{
     
     
     /// 网图数组
-    let urls = [
+    let urls: [String] = [
       "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737078692/im/msg/rec/651722246582308864.jpg",
       "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737078705/im/msg/rec/651722301611577344.jpg",
       "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337130/im/msg/rec/652806214488559616.jpg",

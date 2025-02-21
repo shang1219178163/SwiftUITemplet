@@ -12,10 +12,10 @@ struct TabbarView: View {
 //       //    @State private var path = NavigationPath()
     @StateObject private var navManager = NavManager.shared
 
-//    @State private var selectedTab = 0 // 当前选中的标签页索引
+    @State private var selectedTab = 0 // 当前选中的标签页索引
 
     var body: some View {
-        TabView(selection: NavManager.shared.$selectedTab, content: {
+        TabView(selection: $selectedTab, content: {
             HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
