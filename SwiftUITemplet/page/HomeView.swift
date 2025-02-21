@@ -9,50 +9,95 @@ import SwiftUI
 
 struct HomeView: View {
     //    @State private var path = NavigationPath()
-    @StateObject private var pathModel = AppNavManager.shared
+    @StateObject private var navManager = NavManager.shared
     
 
-    var items = [RouterMode(name: "UnknowView", view: UnknowView()),
-                 RouterMode(name: "CustomView", view: CustomView()),
-                 RouterMode(name: "TestView", view: TestView()),
+    var systemItems = [
+        RouterMode(name: "AnimatePageView", view: AnimatePageView()),
+        RouterMode(name: "ComponentView", view: ComponentView()),
+        RouterMode(name: "CustomeModifierView", view: CustomeModifierView()),
+        RouterMode(name: "DynamicContentView", view: DynamicContentView()),
+        RouterMode(name: "GeometryReaderView", view: GeometryReaderView()),
+        RouterMode(name: "GestureView", view: GestureView()),
+        RouterMode(name: "NavView", view: NavView()),
+    ]
+    
+    var items = [
+        RouterMode(name: "UnknowView", view: UnknowView()),
+        RouterMode(name: "CustomView", view: CustomView()),
+        RouterMode(name: "TestView", view: TestView()),
     ]
 
     
     var body: some View {
-        NavigationStack(path: $pathModel.path) {
+        NavigationStack(path: $navManager.path) {
             List {
-                ForEach(items, id: \.self) { e in
-                    ListItemView(
-                        avatar: AppResource.image.urls[0],
-                        title: {
-                            Text("\(e.name)")
-                                .font(.title2)
-                        },
-                        titleRight: {
-                            Text("")
-                                .font(.title3)
-
-                        },
-                        subtitle: {
-                            Text("")
-                                .font(.title2)
-                        },
-                        subtitleRight: {
-                            Text("")
-                                .font(.title3)
-
+                Section(header: Text("系统组件").font(.headline)) {
+                    Group {
+                        ForEach(systemItems, id: \.self) { e in
+                            ListItemView(
+                                avatar: AppResource.image.urls[0],
+                                title: {
+                                    Text("\(e.name)")
+                                        .font(.title2)
+                                },
+                                titleRight: {
+                                    Text("")
+                                        .font(.title3)
+                                },
+                                subtitle: {
+                                    Text("")
+                                        .font(.title2)
+                                },
+                                subtitleRight: {
+                                    Text("")
+                                        .font(.title3)
+                                }
+                            ).onTapGesture {
+                                //                        navManager.path.append(HashableAnyView(view: e.view))
+                                navManager.push(e.view)
+                            }
                         }
-                    ).onTapGesture {
-                        pathModel.path.append(HashableAnyView(view: e.view))
                     }
                 }
                 
+                // 第二组
+                Section(header: Text("页面").font(.headline)) {
+                    Group {
+                        ForEach(items, id: \.self) { e in
+                            ListItemView(
+                                avatar: AppResource.image.urls[0],
+                                title: {
+                                    Text("\(e.name)")
+                                        .font(.title2)
+                                },
+                                titleRight: {
+                                    Text("")
+                                        .font(.title3)
+                                },
+                                subtitle: {
+                                    Text("")
+                                        .font(.title2)
+                                },
+                                subtitleRight: {
+                                    Text("")
+                                        .font(.title3)
+                                }
+                            ).onTapGesture {
+                                //                        navManager.path.append(HashableAnyView(view: e.view))
+                                navManager.push(e.view)
+                            }
+                        }
+                    }
+                }
+                   
                 Button("Button") {
                     DDLog("Button")
-                    pathModel.path.append(HashableAnyView(view: TestView()))
+                    //                    navManager.path.append(HashableAnyView(view: TestView()))
+                    navManager.push(TestView())
                 }
+            
             }
-            .padding()
             .navigationDestination(for: HashableAnyView.self) { view in
                view.view
            }
@@ -60,11 +105,12 @@ struct HomeView: View {
                 "\(clsName)"
             )
            }
-        .onAppear(){
-               DDLog("onAppear - \(clsName)")
-           }.onDisappear() {
-               DDLog("onDisappear - \(clsName)")
-           }
+//        .onAppear(){
+//           DDLog("onAppear - \(clsName)")
+//        }
+//        .onDisappear() {
+//           DDLog("onDisappear - \(clsName)")
+//        }
     }
 }
 

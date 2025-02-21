@@ -10,7 +10,8 @@ import SwiftUI
 import BBSwiftUIKit
 
 struct TableViewExample: View {
-    @State private var path = NavigationPath() // 管理路径的状态
+       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
 
     class Model: ObservableObject {
         @Published var list: Range<Int> = 0..<10

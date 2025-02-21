@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @State private var path = NavigationPath() // 管理路径的状态
+//       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
 
 //    @Binding private var text: String;
 //    @State private var text: String = ""

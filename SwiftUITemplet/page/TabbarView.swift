@@ -9,12 +9,13 @@ import SwiftUI
 
 struct TabbarView: View {
     
-//    @State private var path = NavigationPath() // 管理路径的状态
+//       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
 
-    @State private var selectedTab = 0 // 当前选中的标签页索引
+//    @State private var selectedTab = 0 // 当前选中的标签页索引
 
     var body: some View {
-        TabView {
+        TabView(selection: NavManager.shared.$selectedTab, content: {
             HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
@@ -38,12 +39,8 @@ struct TabbarView: View {
                     Label("Profile", systemImage: "person.fill")
                 }
                 .tag(3)
-        }
+        })
         .accentColor(.blue)
-        .onChange(of: selectedTab) { newValue in
-            // 打印切换的 Tab
-            DDLog("\(clsName): \(newValue)")
-        }
     }
 }
 

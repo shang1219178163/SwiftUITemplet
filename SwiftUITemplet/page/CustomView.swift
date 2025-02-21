@@ -9,7 +9,8 @@ import SwiftUI
 
 /// 自定义页面
 struct CustomView: View {
-    @State private var path = NavigationPath() // 管理路径的状态
+       //    @State private var path = NavigationPath()
+    @StateObject private var navManager = NavManager.shared
     
     let items = Array(count: 12) { i in
         "选项_\(i)\("z" * i)"
@@ -23,7 +24,7 @@ struct CustomView: View {
 
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navManager.path) {
             ScrollView(.vertical, showsIndicators: true) {
                
 //                VStack {

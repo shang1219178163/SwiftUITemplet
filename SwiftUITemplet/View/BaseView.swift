@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BaseView: View {
-    @StateObject private var pathModel = AppNavManager.shared
+    @StateObject private var pathModel = NavManager.shared
 
     
     var body: some View {
