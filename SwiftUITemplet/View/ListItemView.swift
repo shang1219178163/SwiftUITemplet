@@ -68,11 +68,16 @@ struct ListItemView<TitleView: View, TitleRightView: View, SubtitleView: View, S
                         .cornerRadius(avatarRadius)
                         .clipped()
                      
-                case .failure:
-                    Image(systemName: "xmark.circle.fill") // 显示错误图标
+                case .failure: // 显示错误图标
+                    Image(systemName: "photo")
                         .frame(width: avatarSize, height: avatarSize)
                         .foregroundColor(.red)
                         .cornerRadius(avatarRadius)
+//                    Rectangle()
+//                        .frame(width: avatarSize, height: avatarSize)
+//                        .foregroundColor(.red)
+//                        .cornerRadius(avatarRadius)
+                    
                 @unknown default:
                     EmptyView()
                 }
