@@ -8,7 +8,7 @@
 import Foundation
 
 
-func DDLog(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
+func DDLog(_ message: Any, file: String = #file, function: String = #function, line: Int = #line) {
     // 获取当前时间
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"

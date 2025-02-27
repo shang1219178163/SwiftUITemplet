@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// app 资源
-class AppResource {
+class Resource {
  
     static let image = RImage.shared;
 

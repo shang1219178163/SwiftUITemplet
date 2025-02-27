@@ -24,6 +24,7 @@ struct HomeView: View {
     ]
     
     var items = [
+        RouterMode(name: "PagerViewDemo", view: PagerViewDemo()),
         RouterMode(name: "UnknowView", view: UnknowView()),
         RouterMode(name: "CustomView", view: CustomView()),
         RouterMode(name: "TestView", view: TestView()),
@@ -48,7 +49,7 @@ struct HomeView: View {
 //                                isArrowHide: index % 2 == 0,
                                 title: {
                                     Text("\(e.name)")
-                                        .font(.title3)
+//                                        .font(.title3)
                                 },
                                 titleRight: {
                                     Text("titleRight")
@@ -129,6 +130,7 @@ struct HomeView: View {
             .navigationTitle(
                 "\(clsName)"
             )
+            .navigationBarTitleDisplayMode(.inline)
            }
 //        .onAppear(){
 //           DDLog("onAppear - \(clsName)")

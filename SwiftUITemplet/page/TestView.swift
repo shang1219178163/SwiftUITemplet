@@ -12,7 +12,7 @@ struct TestView: View {
     @StateObject private var navManager = NavManager.shared
 
     @State private var text: String = ""
-    @State private var imageUrls = AppResource.image.urls
+    @State private var imageUrls = Resource.image.urls
 
     var body: some View {
         NavigationStack(path: $navManager.path) {
