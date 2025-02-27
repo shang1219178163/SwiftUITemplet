@@ -1,5 +1,5 @@
 //
-//  WrapViewDemo.swift
+//  WrapDemo.swift
 //  SwiftUITemplet
 //
 //  Created by Bin Shang on 2025/2/27.
@@ -7,23 +7,20 @@
 
 import SwiftUI
 
-
 struct WrapDemo: View {
     //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
-    
-    
-    
+      @StateObject private var navManager = NavManager.shared
+      
     var body: some View {
         NavigationStack(path: $navManager.path) {
             ScrollView(.vertical, showsIndicators: true) {
                 
-                VStack(alignment: .leading, 
-                       spacing: 10,
-                       content: {
-                    Wrap(spacing: 10,
+                VStack(alignment: .leading, spacing: 10, content: {
+                    Wrap(
+                        spacing: 10,
                         runSpacing: 10,
-                        alignment: .leading) {
+                        alignment: .leading
+                    ) {
                         ForEach(0..<20) { i in
                             Text("选项_\(i)\("z" * i)")
                                 .padding(EdgeInsets.symmetric(
@@ -36,8 +33,7 @@ struct WrapDemo: View {
                                     DDLog("onTapGesture: \(i)")
                                 }
                         }
-                    }
-                    .padding(16)
+                    }.padding(/*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                     
                 })
             }
@@ -49,11 +45,8 @@ struct WrapDemo: View {
             )
         }
     }
-
 }
 
-struct WrapDemo_Previews: PreviewProvider {
-    static var previews: some View {
-        WrapDemo()
-    }
+#Preview {
+    WrapDemo()
 }
