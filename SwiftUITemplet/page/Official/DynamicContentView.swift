@@ -26,7 +26,7 @@ struct DynamicContentView: View {
 //            ScrollView(.vertical, showsIndicators: true) {
                 
                 VStack(alignment: .leading, spacing: 10, content: {
-                    // 1. 使用 List 展示静态数据
+//                     1. 使用 List 展示静态数据
                    VStack {
                        Text("List of Fruits")
                            .font(.title2)
@@ -36,6 +36,22 @@ struct DynamicContentView: View {
                        }
                        .frame(height: 200) // Set height for List view
                    }
+                    
+                    
+            
+                    List {
+                        ForEach(dynamicItems, id: \.self) { e in
+                            Text(e).id(e)
+                        }
+                        .onDelete(perform: { indexSet in
+                            self.dynamicItems.remove(atOffsets: indexSet)
+                        })
+                        .onMove{ from,to in
+                            if from.first! != to {
+                                self.dynamicItems.move(fromOffsets: from, toOffset: to)
+                            }
+                        }
+                    }
 
                    // 2. 使用 ForEach 展示动态数据
                    // 4. ForEach 示例: 动态内容展示
@@ -44,8 +60,8 @@ struct DynamicContentView: View {
                            .font(.title2)
                            .padding()
                        List {
-                           ForEach(dynamicItems, id: \.self) { item in
-                               Text(item)
+                           ForEach(dynamicItems, id: \.self) { e in
+                               Text(e).id(e)
                            }
                            .onDelete(perform: deleteItem) // Deletion example
                            .onMove(perform: moveItem) // Move example
@@ -55,6 +71,7 @@ struct DynamicContentView: View {
                            EditButton() // Add editing functionality (move items)
                        }
                    }
+                    
                     
 //                    
 //                    // 3. 使用 LazyVStack 动态加载内容
@@ -89,7 +106,7 @@ struct DynamicContentView: View {
            }
             .navigationTitle(
                 "\(clsName)"
-            )
+            ).navigationBarTitleDisplayMode(.inline)
        }
     }
     
@@ -108,4 +125,11 @@ struct DynamicContentView: View {
 
 #Preview {
     DynamicContentView()
+}
+
+
+
+struct UserDetailModel: Identifiable, Hashable {
+    let id = UUID()
+    let desc: String
 }

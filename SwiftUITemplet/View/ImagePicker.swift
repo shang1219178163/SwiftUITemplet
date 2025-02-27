@@ -13,19 +13,25 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Binding var path: NavigationPath
     @Binding var picture: UIImage?
     
-    func makeUIViewController(context: Context) ->  UIImagePickerController {
-        let mediaPicker = UIImagePickerController()
-        mediaPicker.delegate = context.coordinator
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            mediaPicker.sourceType = .camera
-            mediaPicker.mediaTypes = ["public.image"]
-            mediaPicker.allowsEditing = false
-            mediaPicker.cameraCaptureMode = .photo
+    var sourceType: UIImagePickerController.SourceType = .photoLibrary
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = sourceType
+        picker.delegate = context.coordinator
+        if UIImagePickerController.isSourceTypeAvailable(picker.sourceType) {
+            if picker.sourceType == .camera {
+                picker.mediaTypes = ["public.image"]
+                picker.allowsEditing = false
+                picker.cameraCaptureMode = .photo
+            } else {
+                picker.mediaTypes = ["public.image"]
+            }
         } else {
             print("The media is not available")
 //            path.removeLast()
         }
-        return mediaPicker
+        return picker
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}

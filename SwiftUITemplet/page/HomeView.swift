@@ -24,6 +24,7 @@ struct HomeView: View {
     ]
     
     var items = [
+        RouterMode(name: "PagerViewDemo", view: PagerViewDemo()),
         RouterMode(name: "UnknowView", view: UnknowView()),
         RouterMode(name: "CustomView", view: CustomView()),
         RouterMode(name: "TestView", view: TestView()),
@@ -42,20 +43,20 @@ struct HomeView: View {
                         ForEach(systemItems, id: \.self) { e in
                             ListItemView(
                                 avatar: avatar,
-//                                isTitleRightHide: index % 2 == 0,
+                                isTitleRightHide: true,
 //                                isSubtitleHide: index % 2 == 0,
-//                                isSubtitleRightHide: index % 2 == 0,
+                                isSubtitleRightHide: true,
 //                                isArrowHide: index % 2 == 0,
                                 title: {
                                     Text("\(e.name)")
-                                        .font(.title3)
+//                                        .font(.title3)
                                 },
                                 titleRight: {
                                     Text("titleRight")
                                         .font(.body)
                                 },
                                 subtitle: {
-                                    Text("subtitle")
+                                    Text("")
                                         .font(.body)
                                 },
                                 subtitleRight: {
@@ -65,7 +66,7 @@ struct HomeView: View {
                                 
                             ).onTapGesture {
                                 DDLog("onTapGesture")
-                                //                        navManager.path.append(HashableAnyView(view: e.view))
+//                                navManager.path.append(HashableAnyView(view: e.view))
                                 navManager.push(e.view)
                             }
                         }
@@ -73,9 +74,9 @@ struct HomeView: View {
                         ForEach(items, id: \.self) { e in
                             ListItemView(
                                 avatar: avatar,
-//                                isTitleRightHide: index % 2 == 0,
+                                isTitleRightHide: true,
 //                                isSubtitleHide: index % 2 == 0,
-//                                isSubtitleRightHide: index % 2 == 0,
+                                isSubtitleRightHide: true,
 //                                isArrowHide: index % 2 == 0,
                                 title: {
                                     Text("\(e.name)")
@@ -86,7 +87,7 @@ struct HomeView: View {
                                         .font(.body)
                                 },
                                 subtitle: {
-                                    Text("subtitle")
+                                    Text("")
                                         .font(.body)
                                 },
                                 subtitleRight: {
@@ -129,6 +130,7 @@ struct HomeView: View {
             .navigationTitle(
                 "\(clsName)"
             )
+            .navigationBarTitleDisplayMode(.inline)
            }
 //        .onAppear(){
 //           DDLog("onAppear - \(clsName)")

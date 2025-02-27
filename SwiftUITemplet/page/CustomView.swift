@@ -16,8 +16,8 @@ struct CustomView: View {
         "选项_\(i)\("z" * i)"
     }
     
-    @State private var imageNames = AppResource.image.imageNames
-    @State private var imageUrls = AppResource.image.urls
+    @State private var imageNames = Resource.image.imageNames
+    @State private var imageUrls = Resource.image.urls
     @State private var picture: UIImage?
 
     let columns = Array(repeating: GridItem(.flexible()), count: 4) // 每个元素的最小宽度
@@ -26,7 +26,6 @@ struct CustomView: View {
     var body: some View {
         NavigationStack(path: $navManager.path) {
             ScrollView(.vertical, showsIndicators: true) {
-               
 //                VStack {
 //                      HStack {
 //                          Spacer()
@@ -49,7 +48,7 @@ struct CustomView: View {
 //                    .border(Color.black)
                 
                 // 使用封装的九宫格组件
-                ImageGridView(images: imageUrls, onTap: { index in
+                ImageGridView(images: imageUrls.prefix(9).sorted(), onTap: { index in
                     DDLog("ImageGridView: \(index)")
                 })
                     .border(Color.black)
@@ -71,14 +70,25 @@ struct CustomView: View {
                     .padding(20)
                     .border(Color.gray)
                     .shadow(radius: 3)
-                    
-                    Text("WrapTextView")
-                        .font(.title)
-                    WrapTextView(items: items, maxWidth: 300)
-                        .padding()
-                        .border(Color.blue)
-                        .background(Color.green)
-                })
+                  })
+                
+                Wrap(spacing: 10,
+                    runSpacing: 10,
+                    alignment: .leading) {
+                    ForEach(0..<16) { i in
+                        Text("选项_\(i)_\("z" * i)")
+                            .padding(EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4))
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                            .onTapGesture { p in
+                                DDLog("onTapGesture: \(i)")
+                            }
+                    }
+                }
+                .padding(10)
             }
             .navigationDestination(for: HashableAnyView.self) { view in
                 view.view

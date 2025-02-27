@@ -38,3 +38,23 @@ extension CGRect {
  
 }
 
+extension CGPoint {
+
+    /// 转字符串
+    func toString(_ fixed: Int = 2) -> String {
+        return "(\(self.x.toString(fixed)), \(self.y.toString(fixed)))";
+    }
+ 
+}
+
+extension EdgeInsets {
+
+    static func symmetric(horizontal: Double = 0.0, vertical: Double = 0.0) -> EdgeInsets {
+        return EdgeInsets(top: vertical,
+                          leading: horizontal,
+                          bottom: vertical,
+                          trailing: horizontal)
+    }
+}
+
+

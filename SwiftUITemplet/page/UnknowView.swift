@@ -6,63 +6,59 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct UnknowView: View {
        //    @State private var path = NavigationPath()
     @StateObject private var navManager = NavManager.shared
     
+    let items = Array(count: 12) { i in
+        "选项_\(i)\("z" * i)"
+    }
     
-    @State private var imageNames = AppResource.image.imageNames
-    @State private var imageUrls = AppResource.image.urls
-
+    @State private var isPickerAsset = false
+    @State private var isPickerDocument = false
+    
     
     var body: some View {
         NavigationStack(path: $navManager.path) {
             ScrollView(.vertical, showsIndicators: true) {
-                
                 VStack(alignment: .leading, spacing: 10, content: {
+                    
                     Text("404")
 
-                    Text("Image \(imageNames.count)")
-                    ForEach(imageNames, id: \.self) { e in
-                        HStack {
-                            Image(e)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 60)
-                            
-                            Text("\(e)")
+                    Wrap() {
+                        Button("多媒体选择") {
+                            self.isPickerAsset = true;
+                        }
+                        Button("文档选择") {
+                            self.isPickerDocument = true;
                         }
                     }
-                    
-                    Text("AsyncImage \(imageUrls.count)")
-                    ForEach(imageUrls, id: \.self) { e in
-                        HStack {
-                            AsyncImage(url: URL(string: e)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
-                                    .cornerRadius(10)
-                                    .padding()
-                            } placeholder: {
-                                ProgressView()
-                                    .frame(width: 60, height: 60)
-                                    .progressViewStyle(CircularProgressViewStyle())
-                                    .padding()
-                            }
-                            Text("\(e.split(separator: "/").last ?? "-")")
 
-                        }
-                    }
                 })
             }
+            .sheet(isPresented: $isPickerAsset, content: {
+                AssetPicker(
+                    onChanged: {image, url in
+                    DDLog("image: \(image)")
+                    DDLog("url: \(url)")
+                }, 
+                    filter: .any(of: [.images, .videos])
+                )
+            })
+            .sheet(isPresented: $isPickerDocument, content: {
+                DocumentPicker(callback: { urls in
+                    DDLog("urls: \(urls)")
+
+                }).ignoresSafeArea()
+            })
             .navigationDestination(for: HashableAnyView.self) { view in
                 view.view
             }
             .navigationTitle(
                 "\(clsName)"
-            )
+            ).navigationBarTitleDisplayMode(.inline)
         }
     }
 }
