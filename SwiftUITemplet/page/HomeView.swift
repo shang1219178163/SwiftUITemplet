@@ -14,21 +14,21 @@ struct HomeView: View {
 
     /// 系统相关组件
     var systemItems = [
-        RouterMode(name: "AnimatePageView", view: AnimatePageView()),
-        RouterMode(name: "ComponentView", view: ComponentView()),
-        RouterMode(name: "CustomeModifierView", view: CustomeModifierView()),
-        RouterMode(name: "DynamicContentView", view: DynamicContentView()),
-        RouterMode(name: "GeometryReaderView", view: GeometryReaderView()),
-        RouterMode(name: "GestureView", view: GestureView()),
-        RouterMode(name: "NavView", view: NavView()),
+        RouterModel(name: "AnimatePageView", view: AnimatePageView()),
+        RouterModel(name: "ComponentView", view: ComponentView()),
+        RouterModel(name: "CustomeModifierView", view: CustomeModifierView()),
+        RouterModel(name: "DynamicContentView", view: DynamicContentView()),
+        RouterModel(name: "GeometryReaderView", view: GeometryReaderView()),
+        RouterModel(name: "GestureView", view: GestureView()),
+        RouterModel(name: "NavView", view: NavView()),
     ]
     
     var items = [
-        RouterMode(name: "WrapDemo", view: WrapDemo()),
-        RouterMode(name: "PagerViewDemo", view: PagerViewDemo()),
-        RouterMode(name: "UnknowView", view: UnknowView()),
-        RouterMode(name: "CustomView", view: CustomView()),
-        RouterMode(name: "TestView", view: TestView()),
+        RouterModel(name: "WrapDemo", view: WrapDemo()),
+        RouterModel(name: "PagerViewDemo", view: PagerViewDemo()),
+        RouterModel(name: "UnknowView", view: UnknowView()),
+        RouterModel(name: "CustomView", view: CustomView()),
+        RouterModel(name: "TestView", view: TestView()),
     ]
     
     

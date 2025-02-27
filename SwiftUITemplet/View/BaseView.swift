@@ -36,7 +36,7 @@ struct BaseView: View {
 
 
 
-struct RouterMode: Hashable {
+struct RouterModel: Hashable {
 
     let name: String
     let view: any View
@@ -48,7 +48,7 @@ struct RouterMode: Hashable {
     }
 
     // 实现符合 Hashable 协议的 == 操作符
-    static func == (lhs: RouterMode, rhs: RouterMode) -> Bool {
+    static func == (lhs: RouterModel, rhs: RouterModel) -> Bool {
         return String(describing: type(of: lhs.view)) == String(describing: type(of: rhs.view))
     }
 }
