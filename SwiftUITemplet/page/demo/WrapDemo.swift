@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct WrapDemo: View {
-    //    @State private var path = NavigationPath()
-      @StateObject private var navManager = NavManager.shared
-      
+    @StateObject private var navManager = NavManager.shared
+
+    
     var body: some View {
         NavigationStack(path: $navManager.path) {
             ScrollView(.vertical, showsIndicators: true) {
