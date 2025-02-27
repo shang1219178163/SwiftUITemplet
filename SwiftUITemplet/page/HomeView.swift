@@ -24,6 +24,7 @@ struct HomeView: View {
     ]
     
     var items = [
+        RouterMode(name: "WrapDemo", view: WrapDemo()),
         RouterMode(name: "PagerViewDemo", view: PagerViewDemo()),
         RouterMode(name: "UnknowView", view: UnknowView()),
         RouterMode(name: "CustomView", view: CustomView()),
@@ -80,7 +81,6 @@ struct HomeView: View {
 //                                isArrowHide: index % 2 == 0,
                                 title: {
                                     Text("\(e.name)")
-                                        .font(.title3)
                                 },
                                 titleRight: {
                                     Text("titleRight")
@@ -107,7 +107,6 @@ struct HomeView: View {
                     Group {
                         CustomOneCell(showArrow: false) {
                             Text("CustomOneCell")
-                                .font(.headline)
                         } detail: {
                             Text("Subtitle")
                                 .font(.subheadline)
