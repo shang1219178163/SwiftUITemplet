@@ -105,7 +105,7 @@ struct AssetPicker: UIViewControllerRepresentable {
                       try? FileManager.default.copyItem(at: url, to: newUrl)
                     
                       DispatchQueue.main.async {
-                         self.onChanged(nil, url)
+                         self.onChanged(nil, newUrl)
                       }
                 }
                                 
