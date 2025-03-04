@@ -17,7 +17,10 @@ struct ProfileView: View {
        
                 Button {
                     DDLog("button")
-                    router.toNamed(AppRouter.settings, arguments: ["a": "aa", "onNext": onNext])
+                    router.toNamed(AppRouter.settings, arguments: ["a": "aa",
+                                                                   "onNext": onNext,
+                                                                   "onResult": onResult,
+                                                                  ])
                 } label: {
                     return Text("Button")
                 }
@@ -32,7 +35,11 @@ struct ProfileView: View {
     }
     
     func onNext(result: String) -> Void {
-        DDLog("result: \(result)")
+        DDLog("\(result)")
+    }
+    
+    func onResult(result: [String: Any]) -> Void {
+        DDLog("\(result)")
     }
 }
 

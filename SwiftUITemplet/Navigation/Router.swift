@@ -252,10 +252,6 @@ class Router: ObservableObject {
         }
     }
     
-    // pop 方法作为 back 的别名
-    func pop() {
-        back()
-    }
     
     // 返回到根页面
     func backToRoot() {

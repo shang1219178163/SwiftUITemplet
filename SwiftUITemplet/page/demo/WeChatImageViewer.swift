@@ -248,7 +248,7 @@ class ImageViewController: UIViewController {
     }
     
     @objc private func handleSingleTap(_ gesture: UITapGestureRecognizer) {
-        router.pop()
+        router.back()
     }
     
     @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
