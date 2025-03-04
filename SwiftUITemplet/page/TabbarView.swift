@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TabbarView: View {
     
-//       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+//       
+    @StateObject private var router = Router.shared
 
     @State private var selectedTab = 0 // 当前选中的标签页索引
 
@@ -39,6 +39,12 @@ struct TabbarView: View {
                     Label("Profile", systemImage: "person.fill")
                 }
                 .tag(3)
+            ImageGalleryDemo()
+                .tabItem {
+                    Label("Other", systemImage: "person.fill")
+                }
+                .tag(4)
+            
         })
         .accentColor(.blue)
     }

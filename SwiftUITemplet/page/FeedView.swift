@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct FeedView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
 
     @State private var data: [String] = []
     @State private var isLoading = false
@@ -22,7 +22,7 @@ struct FeedView: View {
     @State private var isLoadingMore = false  // 加载状态
     
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             RefreshableScrollViewNew(
                 onRefresh: onRefresh,
                 onLoad: onLoad
@@ -72,12 +72,11 @@ struct FeedView: View {
 //                
 //            })
 //            .padding()
-            .navigationDestination(for: HashableAnyView.self) { view in
-               view.view
-           }
-            .navigationTitle(
-                "\(clsName)"
-            ).onAppear(perform: {
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
+            .onAppear(perform: {
 //                DDLog("clsName data: \(String(describing: type(of: self.data)))")
                 onRefresh()
             })

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct TestView: View {
-//    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+
+    @StateObject private var router = Router.shared
 
     @State private var text: String = ""
     @State private var imageUrls = Resource.image.urls
 
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             VStack(alignment: .leading, content: {
                 ListItemView(
                     avatar: imageUrls[0],
@@ -38,21 +38,12 @@ struct TestView: View {
 
                     }
                 )
-                
-                Button("Router导航") {
-                    let router = Router(navigator: SwiftUINavigator(path: $navManager.path));
-                    router.to(AnyView(DetailView()))
-                }
-                
-                Button("SwiftUINavigator 导航") {
-                    let navigator = SwiftUINavigator(path: $navManager.path)
-                    navigator.push(AnyView(DetailView()))
-                }
-                
-                Button("Button") {
-                    DDLog("Button")
-                    navManager.path.append(HashableAnyView(view: DetailView()))
-                }
+                                
+//
+//                Button("Button") {
+//                    DDLog("Button")
+//                    router.path.append(HashableAnyView(view: DetailView()))
+//                }
                 
                 SearchBarView(text: $text,
                               placeholder: "搜索"
@@ -98,12 +89,10 @@ struct TestView: View {
                 
             })
             .padding()
-            .navigationDestination(for: HashableAnyView.self) { view in
-               view.view
-           }
-            .navigationTitle(
-                "\(clsName)"
-            )
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
         }
 //        .onAppear(){
 //            DDLog("onAppear - \(clsName)")

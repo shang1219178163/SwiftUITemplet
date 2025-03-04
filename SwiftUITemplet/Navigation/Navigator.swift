@@ -99,8 +99,8 @@ struct HashableAnyView: Hashable {
 }
 
 /// 路由
-class Router {
-    private var navigator: Navigator
+class RouterManager {
+    var navigator: Navigator
 
     init(navigator: Navigator) {
         self.navigator = navigator

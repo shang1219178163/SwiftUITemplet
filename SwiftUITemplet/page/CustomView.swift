@@ -9,8 +9,8 @@ import SwiftUI
 
 /// 自定义页面
 struct CustomView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
     
     let items = Array(count: 12) { i in
         "选项_\(i)\("z" * i)"
@@ -24,7 +24,7 @@ struct CustomView: View {
 
     
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             ScrollView(.vertical, showsIndicators: true) {
 //                VStack {
 //                      HStack {
@@ -90,12 +90,10 @@ struct CustomView: View {
                 }
                 .padding(10)
             }
-            .navigationDestination(for: HashableAnyView.self) { view in
-                view.view
-            }
-            .navigationTitle(
-                "\(clsName)"
-            )
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
         }
     }
     

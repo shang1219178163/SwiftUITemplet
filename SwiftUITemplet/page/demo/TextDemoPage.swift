@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TextDemoPage: View {
-    @StateObject private var navManager = NavManager.shared
+    @StateObject private var router = Router.shared
     
   var body: some View {
-      NavigationStack(path: $navManager.path) {
+      NavigationStack(path: $router.path) {
           ScrollView(.vertical, showsIndicators: true) {
               
               VStack(alignment: .leading, spacing: 10, content: {
@@ -82,13 +82,10 @@ struct TextDemoPage: View {
                   
               })
           }
-          .navigationDestination(for: HashableAnyView.self) { view in
-              view.view
-          }
-          .navigationTitle(
-              "\(clsName)"
-          )
-          .navigationBarTitleDisplayMode(.inline)
+          .navigationBar(title: "\(clsName)")
+//            .navigationDestination(for: AppPage<AnyView>.self) { page in
+//                page.makeView()
+//            }
       }
   }
 }

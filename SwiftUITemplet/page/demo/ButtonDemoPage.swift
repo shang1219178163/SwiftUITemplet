@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ButtonDemoPage: View {
   
-    @StateObject private var navManager = NavManager.shared
+    @StateObject private var router = Router.shared
     @State var isToggle: Bool = false
     
     @State var slideValue = 0.0
@@ -22,7 +22,7 @@ struct ButtonDemoPage: View {
     @State var hourSelection: Date = Date()
 
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             ScrollView(.vertical, showsIndicators: true) {
                 
                 VStack(alignment: .leading, spacing: 10, content: {
@@ -179,13 +179,10 @@ struct ButtonDemoPage: View {
                 
                 }).padding(10)
             }
-            .navigationDestination(for: HashableAnyView.self) { view in
-                view.view
-            }
-            .navigationTitle(
-                "\(clsName)"
-            )
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
         }
     }
 }

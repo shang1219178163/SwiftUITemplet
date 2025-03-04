@@ -2,11 +2,12 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ImageGalleryDemo: View {
+    @StateObject private var router = Router.shared
+    
     // 使用 Resource 中的 urls
     private let imageUrls = Resource.image.urls
     @State private var images: [Int: UIImage] = [:]  // 使用字典存储图片，键为索引
     @State private var selectedImageIndex = 0
-    @State private var showImageViewer = false
     
     // 每行显示4个图片
     private let columns = [
@@ -24,6 +25,23 @@ struct ImageGalleryDemo: View {
     }
     
     var body: some View {
+        NavigationStack(path: $router.path) {
+            VStack {
+                content
+            }
+            .navigationBar(title: "图片预览")
+            .onAppear {
+                router.isPresented = true
+                DDLog("onAppear \(router.path == router.path)")
+            }.onDisappear(perform: {
+                DDLog("onDisappear \(router.path == router.path)")
+            })
+        }
+  
+     
+    }
+    
+    private var content: some View {
         GeometryReader { geometry in
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 8) {
@@ -39,22 +57,17 @@ struct ImageGalleryDemo: View {
                             .cornerRadius(8)
                             .onTapGesture {
                                 selectedImageIndex = index
-                                showImageViewer = true
                                 loadImages(startFrom: index)
+                                router.toNamed(AppRouter.imageViewer, arguments: [
+                                    "images": orderedImages,
+                                    "selectedIndex": selectedImageIndex
+                                ])
                             }
                     }
                 }
                 .padding(.horizontal, 8)
             }
         }
-        .fullScreenCover(isPresented: $showImageViewer) {
-            WeChatImageViewer(
-                images: orderedImages,
-                selectedIndex: $selectedImageIndex,
-                isPresented: $showImageViewer
-            )
-        }
-        .navigationTitle("图片预览")
     }
     
     private func loadImages(startFrom: Int) {
@@ -81,7 +94,5 @@ struct ImageGalleryDemo: View {
 }
 
 #Preview {
-    NavigationView {
-        ImageGalleryDemo()
-    }
+    ImageGalleryDemo()
 } 

@@ -8,41 +8,39 @@
 import SwiftUI
 
 struct DetailView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
 
 //    init(path: NavigationPath = NavigationPath()) {
 //        self.path = path
 //    }
 
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             VStack(alignment: .leading, content: {
                 Button("Router导航") {
-                    let router = Router(navigator: SwiftUINavigator(path: $navManager.path));
-                    router.to(AnyView(TestView()))
+                    let router = Router.shared
+                    router.toNamed(AppRouter.detail)
                 }
                 
                 Button( "SwiftUINavigator 导航") {
-                    let navigator = SwiftUINavigator(path: $navManager.path)
+                    let navigator = SwiftUINavigator(path: $router.path)
                     navigator.push(AnyView(TestView()))
                 }
         
                 Button {
                     DDLog("button")
-                    navManager.path.append(HashableAnyView(view: TestView()))
+                    router.toNamed(AppRouter.detail)
                 } label: {
                     Text("Button")
                 }
                 
             })
             .padding()
-            .navigationDestination(for: HashableAnyView.self) { view in
-               view.view
-           }
-            .navigationTitle(
-                "\(clsName)"
-            )
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
            }
     }
 }

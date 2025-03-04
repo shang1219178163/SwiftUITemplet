@@ -4,25 +4,38 @@ struct WeChatImageViewer: View {
     let images: [UIImage]
     @Binding var selectedIndex: Int
     @Binding var isPresented: Bool
+    @StateObject private var router = Router.shared
+    
     
     var body: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
+        NavigationStack(path: $router.path) {
             
-            ImagePagerView(
-                images: images,
-                selectedIndex: $selectedIndex,
-                isPresented: $isPresented
-            )
-            
-            // 页面指示器
-            VStack {
-                Spacer()
-                Text("\(selectedIndex + 1)/\(images.count)")
-                    .foregroundColor(.white)
-                    .padding(.bottom, 20)
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                
+                ImagePagerView(
+                    images: images,
+                    selectedIndex: $selectedIndex,
+                    isPresented: $isPresented,
+                    onBack: onBack
+                )
             }
+            .navigationBar(title: "\(selectedIndex + 1)/\(images.count)")
+//            .navigationDestination(for: AppPage<AnyView>.self) { page in
+//                page.makeView()
+//            }
+            .onAppear {
+                router.isPresented = true
+                DDLog("onAppear \(router.path == router.path)")
+            }.onDisappear(perform: {
+                DDLog("onDisappear \(router.path == router.path)")
+            })
         }
+    }
+    
+    
+    func onBack() -> Void {
+        router.back()
     }
 }
 
@@ -30,7 +43,8 @@ struct ImagePagerView: UIViewControllerRepresentable {
     let images: [UIImage]
     @Binding var selectedIndex: Int
     @Binding var isPresented: Bool
-    
+    let onBack: () -> Void
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -119,9 +133,11 @@ class ImageViewController: UIViewController {
     let image: UIImage
     let index: Int
     @Binding var isPresented: Bool
+    private let router = Router.shared
     
     private var imageView: UIImageView!
     private var scrollView: UIScrollView!
+    private var singleTapGesture: UITapGestureRecognizer!
     private var doubleTapGesture: UITapGestureRecognizer!
     private var panGesture: UIPanGestureRecognizer!
     
@@ -141,6 +157,11 @@ class ImageViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateImageViewFrame()
+    }
+    
     private func setupUI() {
         // 设置滚动视图
         scrollView = UIScrollView()
@@ -149,49 +170,85 @@ class ImageViewController: UIViewController {
         scrollView.maximumZoomScale = 3.0
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .black
         view.addSubview(scrollView)
         scrollView.frame = view.bounds
+        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // 设置图片视图
         imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .clear
         scrollView.addSubview(imageView)
         
         // 调整图片大小以适应屏幕
-        let imageSize = calculateImageSize()
-        imageView.frame = CGRect(origin: .zero, size: imageSize)
-        scrollView.contentSize = imageSize
-        centerImage()
+        updateImageViewFrame()
         
         // 添加手势
+        singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(_:)))
+        singleTapGesture.numberOfTapsRequired = 1
+        view.addGestureRecognizer(singleTapGesture)
+        
         doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
         doubleTapGesture.numberOfTapsRequired = 2
         view.addGestureRecognizer(doubleTapGesture)
+        
+        // 确保单击手势不会与双击手势冲突
+        singleTapGesture.require(toFail: doubleTapGesture)
         
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         panGesture.delegate = self
         view.addGestureRecognizer(panGesture)
     }
     
+    private func updateImageViewFrame() {
+        let imageSize = calculateImageSize()
+        imageView.frame = CGRect(origin: .zero, size: imageSize)
+        scrollView.contentSize = imageSize
+        centerImage()
+    }
+    
     private func calculateImageSize() -> CGSize {
+        guard image.size.width > 0, image.size.height > 0 else { return .zero }
+        
+        let screenSize = view.bounds.size
         let imageRatio = image.size.width / image.size.height
-        let screenRatio = view.bounds.width / view.bounds.height
+        let screenRatio = screenSize.width / screenSize.height
         
         if imageRatio > screenRatio {
-            let width = view.bounds.width
+            // 图片更宽，以屏幕宽度为准
+            let width = screenSize.width
             let height = width / imageRatio
             return CGSize(width: width, height: height)
         } else {
-            let height = view.bounds.height
+            // 图片更高，以屏幕高度为准
+            let height = screenSize.height
             let width = height * imageRatio
             return CGSize(width: width, height: height)
         }
     }
     
     private func centerImage() {
-        let offsetX = max((scrollView.bounds.width - imageView.frame.width) / 2, 0)
-        let offsetY = max((scrollView.bounds.height - imageView.frame.height) / 2, 0)
-        imageView.frame.origin = CGPoint(x: offsetX, y: offsetY)
+        let boundsSize = scrollView.bounds.size
+        var frameToCenter = imageView.frame
+        
+        if frameToCenter.size.width < boundsSize.width {
+            frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2
+        } else {
+            frameToCenter.origin.x = 0
+        }
+        
+        if frameToCenter.size.height < boundsSize.height {
+            frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2
+        } else {
+            frameToCenter.origin.y = 0
+        }
+        
+        imageView.frame = frameToCenter
+    }
+    
+    @objc private func handleSingleTap(_ gesture: UITapGestureRecognizer) {
+        router.pop()
     }
     
     @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {

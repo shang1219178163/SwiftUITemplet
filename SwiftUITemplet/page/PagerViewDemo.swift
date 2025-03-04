@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PagerViewDemo: View {
-    @StateObject private var navManager = NavManager.shared
+    @StateObject private var router = Router.shared
 
     @State private var hidden = false
     @State private var currentPage = 0
@@ -17,7 +17,7 @@ struct PagerViewDemo: View {
 
     
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             VStack(alignment: .leading, 
                    spacing: 10,
                    content: {
@@ -38,13 +38,10 @@ struct PagerViewDemo: View {
                         }
                 }
             })
-            .navigationDestination(for: HashableAnyView.self) { view in
-                view.view
-            }
-            .navigationTitle(
-                "\(clsName)"
-            )
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
         }
     }
 }

@@ -9,14 +9,14 @@ import SwiftUI
 
 struct SheetDemoPage: View {
     
-    @StateObject private var navManager = NavManager.shared
+    @StateObject private var router = Router.shared
     @State var showAlert: Bool = false
     @State var showSheet: Bool = false
     @State var showPop: Bool = false
 
 
     var body: some View {
-      NavigationStack(path: $navManager.path) {
+      NavigationStack(path: $router.path) {
           ScrollView(.vertical, showsIndicators: true) {
               
               VStack(alignment: .leading, spacing: 10, content: {
@@ -74,13 +74,10 @@ struct SheetDemoPage: View {
                                 
               }).padding(10)
           }
-          .navigationDestination(for: HashableAnyView.self) { view in
-              view.view
-          }
-          .navigationTitle(
-              "\(clsName)"
-          )
-          .navigationBarTitleDisplayMode(.inline)
+          .navigationBar(title: "\(clsName)")
+//            .navigationDestination(for: AppPage<AnyView>.self) { page in
+//                page.makeView()
+//            }
       }
   }
 }

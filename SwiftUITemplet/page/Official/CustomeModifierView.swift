@@ -41,14 +41,14 @@ extension View {
 
 /// 自定义视图修饰符
 struct CustomeModifierView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
     
     @State private var showText = true
 
     
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             ScrollView(.vertical, showsIndicators: true) {
                 
                 VStack(alignment: .leading, spacing: 10, content: {
@@ -75,12 +75,10 @@ struct CustomeModifierView: View {
                 })
                 .frame(width: .infinity)
             }
-            .navigationDestination(for: HashableAnyView.self) { view in
-                view.view
-            }
-            .navigationTitle(
-                "\(clsName)"
-            )
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
         }
     }
 }
