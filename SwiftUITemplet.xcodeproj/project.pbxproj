@@ -89,6 +89,19 @@
 		14FF9FA82D700736004D0C81 /* Wrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF9FA72D700736004D0C81 /* Wrap.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		14CAB96B2D76EBC700EC2EEA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		142CB9352A90CCF200CBD9F4 /* SwiftUITemplet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUITemplet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142CB9382A90CCF200CBD9F4 /* SwiftUITempletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITempletApp.swift; sourceTree = "<group>"; };
@@ -380,6 +393,7 @@
 				142CB9312A90CCF200CBD9F4 /* Sources */,
 				142CB9322A90CCF200CBD9F4 /* Frameworks */,
 				142CB9332A90CCF200CBD9F4 /* Resources */,
+				14CAB96B2D76EBC700EC2EEA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -432,7 +446,6 @@
 				14E469632D656D0E00B7372F /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				14E469662D65705700B7372F /* XCRemoteSwiftPackageReference "Charts" */,
 				14E4696B2D6570CF00B7372F /* XCRemoteSwiftPackageReference "SwiftDate" */,
-				14E4696E2D6571B400B7372F /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				14E469712D65721F00B7372F /* XCRemoteSwiftPackageReference "MJRefresh" */,
 				14E4697B2D6592F900B7372F /* XCRemoteSwiftPackageReference "BBSwiftUIKit" */,
 			);
@@ -787,14 +800,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.0.0;
-			};
-		};
-		14E4696E2D6571B400B7372F /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.19;
 			};
 		};
 		14E469712D65721F00B7372F /* XCRemoteSwiftPackageReference "MJRefresh" */ = {
