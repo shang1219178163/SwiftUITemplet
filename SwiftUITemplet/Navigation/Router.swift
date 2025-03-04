@@ -149,68 +149,41 @@ protocol RouterMiddleware {
 
 // 路由管理器
 class Router: ObservableObject {
-    @Published var homePath = NavigationPath()
-    @Published var discoveryPath = NavigationPath()
-    @Published var profilePath = NavigationPath()
-    @Published var isPresented: Bool = false
+    static let shared = Router()
+    private init() {}
+    
     @Published var selectedTab: Int = 0
+    @Published var pathTabs = [
+        NavigationPath(),
+        NavigationPath(),
+        NavigationPath(),
+        NavigationPath(),
+        NavigationPath(),
+    ]
+    
+    @Published var isPresented: Bool = false
     
     private var middlewares: [RouterMiddleware] = []
-    @Published var homeHistory: [AppPage<AnyView>] = []
-    @Published var discoveryHistory: [AppPage<AnyView>] = []
-    @Published var profileHistory: [AppPage<AnyView>] = []
+    @Published var historyTabs: [[AppPage<AnyView>]] = [[], [], [], [], []]
+
     
+    /// 当前tab导航
     var path: NavigationPath {
         get {
-            switch selectedTab {
-            case 0:
-                return homePath
-            case 1:
-                return discoveryPath
-            case 2:
-                return profilePath
-            default:
-                return NavigationPath()
-            }
+            return pathTabs[selectedTab]
         }
         set {
-            switch selectedTab {
-            case 0:
-                homePath = newValue
-            case 1:
-                discoveryPath = newValue
-            case 2:
-                profilePath = newValue
-            default:
-                break
-            }
+            pathTabs[selectedTab] = newValue
         }
     }
     
+    /// 当前tab历史
     var historys: [AppPage<AnyView>] {
         get {
-            switch selectedTab {
-            case 0:
-                return homeHistory
-            case 1:
-                return discoveryHistory
-            case 2:
-                return profileHistory
-            default:
-                return []
-            }
+            return historyTabs[selectedTab]
         }
         set {
-            switch selectedTab {
-            case 0:
-                homeHistory = newValue
-            case 1:
-                discoveryHistory = newValue
-            case 2:
-                profileHistory = newValue
-            default:
-                break
-            }
+            historyTabs[selectedTab] = newValue
         }
     }
     
@@ -227,9 +200,6 @@ class Router: ObservableObject {
         });
     }
 
-    
-    static let shared = Router()
-    private init() {}
     
     // 添加中间件
     func addMiddleware(_ middleware: RouterMiddleware) {
@@ -273,7 +243,7 @@ class Router: ObservableObject {
                 self.path.removeLast(count)
             }
             
-            DDLog("back path: \(path.count), \(path == homePath), \(["homeHistory": homeHistory.count,])")
+            DDLog("back path: \(path.count))")
             log(prefix: "pop >>> ")
             
             withAnimation {
@@ -303,7 +273,13 @@ class Router: ObservableObject {
     }
     
     func log(prefix: String = ""){
-        DDLog("\(prefix) path: \(path.count), \(path == path), \(path == homePath), \(["homeHistory": homeHistory.count, "discoveryHistory": discoveryHistory.count, "profileHistory": profileHistory.count,]) routes: \(routeNames)")
+        let tmps = pathTabs.map { p in
+            if let i = pathTabs.firstIndex(of: p) {
+                return "\(i)_\(p.count)"
+            }
+            return ""
+        }
+        DDLog("\(prefix) path: \(tmps.joined(separator: ",")), routes: \(routeNames)")
 
     }
 }
@@ -311,12 +287,15 @@ class Router: ObservableObject {
 // 视图修饰器，用于添加导航标题和返回按钮
 struct NavigationBarModifier: ViewModifier {
     let title: String
+    let titleColor: Color
     let hideBack: Bool
+
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var router = Router.shared
     
-    init(title: String, hideBack: Bool = false) {
+    init(title: String, titleColor: Color = .primary, hideBack: Bool = false) {
         self.title = title
+        self.titleColor = titleColor
         self.hideBack = hideBack
     }
     
@@ -330,6 +309,7 @@ struct NavigationBarModifier: ViewModifier {
             .navigationDestination(for: AppPage<AnyView>.self) { page in
                 page.makeView()
             }
+            .navigationBarBackButtonHidden(true)
             .toolbar {
                 if !hideBack {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -337,7 +317,7 @@ struct NavigationBarModifier: ViewModifier {
                             router.back()
                         } label: {
                             Image(systemName: "chevron.left")
-                                .foregroundColor(.primary)
+                                .foregroundColor(titleColor)
                         }
                     }
                 }

@@ -10,6 +10,11 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var router = Router.shared
     
+    /// 隐藏 TabBar
+    var hideTabBar: Visibility {
+        let result = router.path.isEmpty
+        return result ? .visible : .hidden
+    }
 
     
     var body: some View {
@@ -17,7 +22,9 @@ struct ContentView: View {
             NavigationStack(path: $router.path) {
                 homeTab
                     .navigationBar(title: "首页", hideBack: true)
+
             }
+            .toolbar(hideTabBar, for: .tabBar)
             .tabItem {
                 Image(systemName: "house.fill")
                 Text("首页")
@@ -28,6 +35,7 @@ struct ContentView: View {
                 discoveryTab
                     .navigationBar(title: "发现", hideBack: true)
             }
+            .toolbar(hideTabBar, for: .tabBar)
             .tabItem {
                 Image(systemName: "safari.fill")
                 Text("发现")
@@ -38,12 +46,14 @@ struct ContentView: View {
                 profileTab
                     .navigationBar(title: "我的", hideBack: true)
             }
+            .toolbar(hideTabBar, for: .tabBar)
             .tabItem {
                 Image(systemName: "person.fill")
                 Text("我的")
             }
             .tag(2)
         }
+
     }
 
     private var homeTab: some View {

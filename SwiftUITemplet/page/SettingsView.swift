@@ -10,6 +10,13 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         Text("Hello, World! SettingsView")
+        
+        Button {
+            DDLog("button")
+            
+        } label: {
+            return Text("Button")
+        }
     }
 }
 
