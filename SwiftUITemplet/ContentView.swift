@@ -20,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $router.selectedTab) {
             NavigationStack(path: $router.path) {
-                homeTab
+                TabHomeView()
                     .navigationBar(title: "首页", hideBack: true)
 
             }
@@ -32,7 +32,18 @@ struct ContentView: View {
             .tag(0)
             
             NavigationStack(path: $router.path) {
-                discoveryTab
+                TabMessageView()
+                    .navigationBar(title: "消息", hideBack: true)
+            }
+            .toolbar(hideTabBar, for: .tabBar)
+            .tabItem {
+                Image(systemName: "message.fill")
+                Text("发现")
+            }
+            .tag(1)
+            
+            NavigationStack(path: $router.path) {
+                TabFindView()
                     .navigationBar(title: "发现", hideBack: true)
             }
             .toolbar(hideTabBar, for: .tabBar)
@@ -40,10 +51,10 @@ struct ContentView: View {
                 Image(systemName: "safari.fill")
                 Text("发现")
             }
-            .tag(1)
+            .tag(2)
             
             NavigationStack(path: $router.path) {
-                profileTab
+                TabFindView()
                     .navigationBar(title: "我的", hideBack: true)
             }
             .toolbar(hideTabBar, for: .tabBar)
@@ -51,48 +62,50 @@ struct ContentView: View {
                 Image(systemName: "person.fill")
                 Text("我的")
             }
-            .tag(2)
+            .tag(3)
         }
 
     }
 
     private var homeTab: some View {
-        List {
-            Button("图片预览") {
-                if let img_0 = UIImage(named: "IMG_4120"),
-                   let img_1 = UIImage(named: "IMG_3736") {
-                    router.toNamed(AppRouter.imageViewer, arguments: [
-                        "images": [img_0, img_1],
-                        "selectedIndex": 0
-                    ])
-                } else {
-                    print("⚠️ 图片加载失败：请确保 'img_0' 和 'img_1' 已添加到 Assets.xcassets 中")
-                    // 使用示例图片
-                    if let sampleImage = UIImage(systemName: "photo") {
-                        router.toNamed(AppRouter.imageViewer, arguments: [
-                            "images": [sampleImage, sampleImage],
-                            "selectedIndex": 0
-                        ])
-                    }
-                }
-            }
-            
-            Button("设置") {
-                router.toNamed(AppRouter.settings)
-            }
-            
-            Button("个人中心") {
-                router.toNamed(AppRouter.profile)
-            }
-            
-            Button("详情页") {
-                DDLog("详情页")
-                router.toNamed(AppRouter.detail, arguments: ["title": "详情页标题"])
-            }
-        }
+        return TabHomeView()
+//        List {
+//            Button("图片预览") {
+//                if let img_0 = UIImage(named: "IMG_4120"),
+//                   let img_1 = UIImage(named: "IMG_3736") {
+//                    router.toNamed(AppRouter.imageViewer, arguments: [
+//                        "images": [img_0, img_1],
+//                        "selectedIndex": 0
+//                    ])
+//                } else {
+//                    print("⚠️ 图片加载失败：请确保 'img_0' 和 'img_1' 已添加到 Assets.xcassets 中")
+//                    // 使用示例图片
+//                    if let sampleImage = UIImage(systemName: "photo") {
+//                        router.toNamed(AppRouter.imageViewer, arguments: [
+//                            "images": [sampleImage, sampleImage],
+//                            "selectedIndex": 0
+//                        ])
+//                    }
+//                }
+//            }
+//            
+//            Button("设置") {
+//                router.toNamed(AppRouter.settings)
+//            }
+//            
+//            Button("个人中心") {
+//                router.toNamed(AppRouter.profile)
+//            }
+//            
+//            Button("详情页") {
+//                DDLog("详情页")
+//                router.toNamed(AppRouter.detail, arguments: ["title": "详情页标题"])
+//            }
+//        }
     }
     
     private var discoveryTab: some View {
+        return TabFindView()
         List {
             ForEach(0..<5) { index in
                 Button("发现项目 \(index + 1)") {
@@ -105,52 +118,17 @@ struct ContentView: View {
     }
     
     private var profileTab: some View {
-        List {
-            Section {
-                HStack {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .foregroundColor(.gray)
-                    
-                    VStack(alignment: .leading) {
-                        Text("用户名")
-                            .font(.headline)
-                        Text("查看或编辑个人资料")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-                    
-                    Spacer()
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    router.toNamed(AppRouter.editProfile)
-                }
-            }
-            
-            Section("功能") {
-                Button {
-                    router.toNamed(AppRouter.collection)
-                } label: {
-                    Label("我的收藏", systemImage: "star.fill")
-                }
-                
-                Button {
-                    router.toNamed(AppRouter.notification)
-                } label: {
-                    Label("消息通知", systemImage: "bell.fill")
-                }
-            }
-            
-            Section {
-                Button {
-                    router.toNamed(AppRouter.settings)
-                } label: {
-                    Label("设置", systemImage: "gear")
-                }
-            }
-        }
+        return TabProfileView()
+
+    }
+    
+    
+    func onNext(result: String) -> Void {
+        DDLog("\(result)")
+    }
+    
+    func onResult(result: [String: Any]) -> Void {
+        DDLog("\(result)")
     }
 }
 
@@ -160,13 +138,9 @@ struct ContentView: View {
 }
 
 #Preview("图片预览") {
-    if let sampleImage = UIImage(systemName: "photo") {
-        WeChatImageViewer(
-            images: [sampleImage, sampleImage],
-            selectedIndex: .constant(0),
-            isPresented: .constant(true)
-        )
-    } else {
-        Text("预览不可用")
-    }
+    WeChatImageViewer(
+        images: Resource.image.urls.range(start: 0, end: 9),
+        selectedIndex: .constant(0),
+        isPresented: .constant(true)
+    )
 }

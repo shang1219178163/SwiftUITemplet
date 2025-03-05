@@ -1,29 +1,60 @@
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct WeChatImageViewer: View {
-    let images: [UIImage]
+    let images: [String]  // 改为字符串数组，存储图片 URL
     @Binding var selectedIndex: Int
     @Binding var isPresented: Bool
     @StateObject private var router = Router.shared
+    @State private var isDarkMode: Bool = true
     
     
+    var titleColor: Color {
+        return isDarkMode ? .white : .black
+    }
+    
+    
+    var titleDesc: String {
+        return "\(selectedIndex + 1)/\(images.count)"
+    }
+    
+
     var body: some View {
         NavigationStack(path: $router.path) {
-            
             ZStack {
-                Color.black.edgesIgnoringSafeArea(.all)
+                Color(isDarkMode ? .black : .white).edgesIgnoringSafeArea(.all)
                 
                 ImagePagerView(
-                    images: images,
+                    imageUrls: images,
                     selectedIndex: $selectedIndex,
                     isPresented: $isPresented,
+                    isDarkMode: isDarkMode,
                     onBack: onBack
                 )
             }
-            .navigationBar(title: "\(selectedIndex + 1)/\(images.count)")
-//            .navigationDestination(for: AppPage<AnyView>.self) { page in
-//                page.makeView()
-//            }
+            .navigationBar(title: "\(titleDesc)", titleColor: titleColor)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    VStack(content: {
+                        Text("\(titleDesc)")
+                           .font(.system(size: 22))
+                           .foregroundColor(isDarkMode ? .white : .black)
+                        Text("\($selectedIndex.wrappedValue)")
+                            .foregroundColor(isDarkMode ? .white : .black)
+
+                    })
+            
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        isDarkMode.toggle()
+                    } label: {
+                        Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                            .foregroundColor(isDarkMode ? .white : .black)
+                    }
+                    .padding(.trailing, 6)
+                }
+            }
             .onAppear {
                 router.isPresented = true
                 DDLog("onAppear \(router.path == router.path)")
@@ -33,16 +64,16 @@ struct WeChatImageViewer: View {
         }
     }
     
-    
     func onBack() -> Void {
         router.back()
     }
 }
 
 struct ImagePagerView: UIViewControllerRepresentable {
-    let images: [UIImage]
+    let imageUrls: [String]
     @Binding var selectedIndex: Int
     @Binding var isPresented: Bool
+    let isDarkMode: Bool
     let onBack: () -> Void
 
     func makeCoordinator() -> Coordinator {
@@ -56,12 +87,14 @@ struct ImagePagerView: UIViewControllerRepresentable {
         )
         pageViewController.dataSource = context.coordinator
         pageViewController.delegate = context.coordinator
+        pageViewController.view.backgroundColor = isDarkMode ? .black : .white
         
         // 设置初始页面
         let initialVC = ImageViewController(
-            image: images[selectedIndex],
+            imageUrl: imageUrls[selectedIndex],
             index: selectedIndex,
-            isPresented: $isPresented
+            isPresented: $isPresented,
+            isDarkMode: isDarkMode
         )
         pageViewController.setViewControllers(
             [initialVC],
@@ -73,19 +106,25 @@ struct ImagePagerView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
-        if let currentVC = pageViewController.viewControllers?.first as? ImageViewController,
-           currentVC.index != selectedIndex {
-            let direction: UIPageViewController.NavigationDirection = selectedIndex > currentVC.index ? .forward : .reverse
-            let newVC = ImageViewController(
-                image: images[selectedIndex],
-                index: selectedIndex,
-                isPresented: $isPresented
-            )
-            pageViewController.setViewControllers(
-                [newVC],
-                direction: direction,
-                animated: true
-            )
+        pageViewController.view.backgroundColor = isDarkMode ? .black : .white
+        
+        if let currentVC = pageViewController.viewControllers?.first as? ImageViewController {
+            currentVC.updateBackgroundColor(isDarkMode: isDarkMode)
+            
+            if currentVC.index != selectedIndex {
+                let direction: UIPageViewController.NavigationDirection = selectedIndex > currentVC.index ? .forward : .reverse
+                let newVC = ImageViewController(
+                    imageUrl: imageUrls[selectedIndex],
+                    index: selectedIndex,
+                    isPresented: $isPresented,
+                    isDarkMode: isDarkMode
+                )
+                pageViewController.setViewControllers(
+                    [newVC],
+                    direction: direction,
+                    animated: true
+                )
+            }
         }
     }
     
@@ -102,21 +141,23 @@ struct ImagePagerView: UIViewControllerRepresentable {
             
             let newIndex = imageVC.index - 1
             return ImageViewController(
-                image: parent.images[newIndex],
+                imageUrl: parent.imageUrls[newIndex],
                 index: newIndex,
-                isPresented: parent.$isPresented
+                isPresented: parent.$isPresented,
+                isDarkMode: parent.isDarkMode
             )
         }
         
         func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
             guard let imageVC = viewController as? ImageViewController,
-                  imageVC.index < parent.images.count - 1 else { return nil }
+                  imageVC.index < parent.imageUrls.count - 1 else { return nil }
             
             let newIndex = imageVC.index + 1
             return ImageViewController(
-                image: parent.images[newIndex],
+                imageUrl: parent.imageUrls[newIndex],
                 index: newIndex,
-                isPresented: parent.$isPresented
+                isPresented: parent.$isPresented,
+                isDarkMode: parent.isDarkMode
             )
         }
         
@@ -130,21 +171,24 @@ struct ImagePagerView: UIViewControllerRepresentable {
 }
 
 class ImageViewController: UIViewController {
-    let image: UIImage
+    let imageUrl: String
     let index: Int
     @Binding var isPresented: Bool
     private let router = Router.shared
+    private var isDarkMode: Bool
     
     private var imageView: UIImageView!
     private var scrollView: UIScrollView!
     private var singleTapGesture: UITapGestureRecognizer!
     private var doubleTapGesture: UITapGestureRecognizer!
     private var panGesture: UIPanGestureRecognizer!
+    private var loadingIndicator: UIActivityIndicatorView!
     
-    init(image: UIImage, index: Int, isPresented: Binding<Bool>) {
-        self.image = image
+    init(imageUrl: String, index: Int, isPresented: Binding<Bool>, isDarkMode: Bool) {
+        self.imageUrl = imageUrl
         self.index = index
         self._isPresented = isPresented
+        self.isDarkMode = isDarkMode
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -155,11 +199,20 @@ class ImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        loadImage()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateImageViewFrame()
+        loadingIndicator.center = view.center
+    }
+    
+    func updateBackgroundColor(isDarkMode: Bool) {
+        self.isDarkMode = isDarkMode
+        view.backgroundColor = isDarkMode ? .black : .white
+        scrollView.backgroundColor = isDarkMode ? .black : .white
+        loadingIndicator.color = isDarkMode ? .white : .black
     }
     
     private func setupUI() {
@@ -170,19 +223,24 @@ class ImageViewController: UIViewController {
         scrollView.maximumZoomScale = 3.0
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.backgroundColor = .black
+        scrollView.backgroundColor = isDarkMode ? .black : .white
         view.addSubview(scrollView)
         scrollView.frame = view.bounds
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // 设置图片视图
-        imageView = UIImageView(image: image)
+        imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
         scrollView.addSubview(imageView)
         
-        // 调整图片大小以适应屏幕
-        updateImageViewFrame()
+        // 设置加载指示器
+        loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator.color = isDarkMode ? .white : .black
+        loadingIndicator.hidesWhenStopped = true
+        view.addSubview(loadingIndicator)
+        loadingIndicator.center = view.center
+        loadingIndicator.startAnimating()
         
         // 添加手势
         singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(_:)))
@@ -193,22 +251,45 @@ class ImageViewController: UIViewController {
         doubleTapGesture.numberOfTapsRequired = 2
         view.addGestureRecognizer(doubleTapGesture)
         
-        // 确保单击手势不会与双击手势冲突
         singleTapGesture.require(toFail: doubleTapGesture)
         
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         panGesture.delegate = self
         view.addGestureRecognizer(panGesture)
+        
+        // 设置背景色
+        updateBackgroundColor(isDarkMode: isDarkMode)
+    }
+    
+    private func loadImage() {
+        guard let url = URL(string: imageUrl) else { return }
+        
+        SDWebImageManager.shared.loadImage(with: url, options: [], progress: nil) { [weak self] (image, _, error, _, _, _) in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                self.loadingIndicator.stopAnimating()
+                
+                if let image = image {
+                    self.imageView.image = image
+                    self.updateImageViewFrame()
+                } else {
+                    // 显示错误图片或提示
+                    self.imageView.image = UIImage(systemName: "exclamationmark.triangle")
+                }
+            }
+        }
     }
     
     private func updateImageViewFrame() {
-        let imageSize = calculateImageSize()
+        guard let image = imageView.image else { return }
+        let imageSize = calculateImageSize(for: image)
         imageView.frame = CGRect(origin: .zero, size: imageSize)
         scrollView.contentSize = imageSize
         centerImage()
     }
     
-    private func calculateImageSize() -> CGSize {
+    private func calculateImageSize(for image: UIImage) -> CGSize {
         guard image.size.width > 0, image.size.height > 0 else { return .zero }
         
         let screenSize = view.bounds.size
@@ -216,12 +297,10 @@ class ImageViewController: UIViewController {
         let screenRatio = screenSize.width / screenSize.height
         
         if imageRatio > screenRatio {
-            // 图片更宽，以屏幕宽度为准
             let width = screenSize.width
             let height = width / imageRatio
             return CGSize(width: width, height: height)
         } else {
-            // 图片更高，以屏幕高度为准
             let height = screenSize.height
             let width = height * imageRatio
             return CGSize(width: width, height: height)
@@ -308,7 +387,6 @@ extension ImageViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == panGesture {
             let velocity = panGesture.velocity(in: view)
-            // 只有垂直滑动时才处理手势
             return abs(velocity.y) > abs(velocity.x)
         }
         return true

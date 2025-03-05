@@ -21,6 +21,7 @@ class AppRouter {
     static let geometryReader = "/geometryReader"
     static let gesture = "/gesture"
     static let nav = "/nav"
+    static let imageGalleryDemo = "/imageGallery"
     
     // 自定义组件
     static let wrap = "/wrap"
@@ -91,7 +92,7 @@ class RouteRegistry {
             (AppRouter.profile, { _ in AnyView(ProfileView()) }, { _ in "个人中心" }),
             (AppRouter.detail, { args in AnyView(DetailView()) }, { args in args["title"] as? String ?? "详情" }),
             (AppRouter.imageViewer, { args in
-                let images = args["images"] as? [UIImage] ?? []
+                let images = args["images"] as? [String] ?? []
                 let selectedIndex = args["selectedIndex"] as? Int ?? 0
                 let isPresented = args["isPresented"] as? Bool ?? true
                 return AnyView(WeChatImageViewer(
@@ -101,7 +102,7 @@ class RouteRegistry {
                 ))
             }, { args in
                 let selectedIndex = args["selectedIndex"] as? Int ?? 0
-                let images = args["images"] as? [UIImage] ?? []
+                let images = args["images"] as? [String] ?? []
                 return "\(selectedIndex + 1)/\(images.count)"
             }),
             (AppRouter.discovery, { _ in AnyView(Text("发现页面")) }, { _ in "发现" }),
@@ -126,7 +127,8 @@ class RouteRegistry {
             (AppRouter.pager, { _ in AnyView(PagerViewDemo()) }, { _ in "分页视图" }),
             (AppRouter.unknow, { _ in AnyView(UnknowView()) }, { _ in "未知页面" }),
             (AppRouter.custom, { _ in AnyView(CustomView()) }, { _ in "自定义视图" }),
-            (AppRouter.test, { _ in AnyView(TestView()) }, { _ in "测试页面" })
+            (AppRouter.test, { _ in AnyView(TestView()) }, { _ in "测试页面" }),
+            (AppRouter.imageGalleryDemo, { _ in AnyView(ImageGalleryDemo()) }, { _ in "图片画廊" })
         ]
         
         // 注册所有页面
@@ -224,12 +226,12 @@ class Router: ObservableObject {
         
         withAnimation {
             isPresented = false
-            self.historys.append(finalPage)
-            self.path.append(finalPage)        
+            historys.append(finalPage)
+            path.append(finalPage)
             log(prefix: "push >>> ")
    
             withAnimation {
-                self.isPresented = true
+                isPresented = true
             }
         }
     }
@@ -238,16 +240,15 @@ class Router: ObservableObject {
     func back(count: Int = 1) {
         withAnimation {
             isPresented = false
-            if self.historys.count >= count {
-                self.historys.removeLast(count)
-                self.path.removeLast(count)
+            if historys.count >= count {
+                historys.removeLast(count)
+                path.removeLast(count)
             }
             
-            DDLog("back path: \(path.count))")
             log(prefix: "pop >>> ")
             
             withAnimation {
-                self.isPresented = true
+                isPresented = true
             }
         }
     }
@@ -318,6 +319,7 @@ struct NavigationBarModifier: ViewModifier {
                     }
                 }
             }
+            .foregroundColor(titleColor)
     }
 }
 
@@ -334,8 +336,8 @@ struct ScaleTransition: ViewModifier {
 }
 
 extension View {
-    func navigationBar(title: String, hideBack: Bool = false) -> some View {
-        modifier(NavigationBarModifier(title: title, hideBack: hideBack))
+    func navigationBar(title: String, titleColor: Color = .primary, hideBack: Bool = false) -> some View {
+        modifier(NavigationBarModifier(title: title, titleColor: titleColor, hideBack: hideBack))
     }
     
     func scaleTransition(isPresented: Bool) -> some View {

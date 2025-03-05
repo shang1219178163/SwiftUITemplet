@@ -44,6 +44,9 @@ struct HomeView: View {
         RouterModel(name: "UnknowView", route: AppRouter.unknow),
         RouterModel(name: "CustomView", route: AppRouter.custom),
         RouterModel(name: "TestView", route: AppRouter.test),
+        RouterModel(name: "imageGalleryDemo", route: AppRouter.imageGalleryDemo),
+
+        
     ]
     
     
@@ -69,25 +72,6 @@ struct HomeView: View {
             }
         }
     }
-    
-    
-    var body1: some View {
-           // 使用 NavigationStack 管理导航
-           NavigationStack {
-               VStack {
-                   Text("Home Screen")
-                       .font(.largeTitle)
-                       .padding()
-               }
-               .navigationTitle("Home")
-               .navigationDestination(for: String.self) { value in
-                   if value == "DetailView" {
-                       DetailView()
-                   }
-               }
-           
-           }
-       }
     
     // MARK: - Subviews
     
