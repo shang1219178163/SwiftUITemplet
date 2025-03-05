@@ -25,7 +25,7 @@ struct DetailView: View {
                 
                 Button( "SwiftUINavigator 导航") {
                     let navigator = SwiftUINavigator(path: $router.path)
-                    navigator.push(AnyView(TestView()))
+                    navigator.push(AnyView(TabTestView()))
                 }
         
                 Button {

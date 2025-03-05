@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabFindView: View {
     var body: some View {
-        return TestView()
+        Text("TabFindView")
     }
 }
 

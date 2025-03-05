@@ -95,9 +95,9 @@ class RouteRegistry {
                 let images = args["images"] as? [String] ?? []
                 let selectedIndex = args["selectedIndex"] as? Int ?? 0
                 let isPresented = args["isPresented"] as? Bool ?? true
-                return AnyView(WeChatImageViewer(
+                return AnyView(NImagePreviewer(
                     images: images,
-                    selectedIndex: .constant(selectedIndex),
+                    selectedIndex: selectedIndex,
                     isPresented: .constant(isPresented)
                 ))
             }, { args in
@@ -127,7 +127,7 @@ class RouteRegistry {
             (AppRouter.pager, { _ in AnyView(PagerViewDemo()) }, { _ in "分页视图" }),
             (AppRouter.unknow, { _ in AnyView(UnknowView()) }, { _ in "未知页面" }),
             (AppRouter.custom, { _ in AnyView(CustomView()) }, { _ in "自定义视图" }),
-            (AppRouter.test, { _ in AnyView(TestView()) }, { _ in "测试页面" }),
+            (AppRouter.test, { _ in AnyView(TabTestView()) }, { _ in "测试页面" }),
             (AppRouter.imageGalleryDemo, { _ in AnyView(ImageGalleryDemo()) }, { _ in "图片画廊" })
         ]
         

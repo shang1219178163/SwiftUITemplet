@@ -1,24 +1,30 @@
+
+
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct WeChatImageViewer: View {
+/// 图片预览器
+struct NImagePreviewer: View {
     let images: [String]  // 改为字符串数组，存储图片 URL
-    @Binding var selectedIndex: Int
+    @State private var selectedIndex: Int
     @Binding var isPresented: Bool
     @StateObject private var router = Router.shared
     @State private var isDarkMode: Bool = true
     
+    init(images: [String], selectedIndex: Int, isPresented: Binding<Bool>) {
+        self.images = images
+        self._selectedIndex = State(initialValue: selectedIndex)
+        self._isPresented = isPresented
+    }
     
     var titleColor: Color {
         return isDarkMode ? .white : .black
     }
     
-    
     var titleDesc: String {
         return "\(selectedIndex + 1)/\(images.count)"
     }
     
-
     var body: some View {
         NavigationStack(path: $router.path) {
             ZStack {
@@ -37,20 +43,18 @@ struct WeChatImageViewer: View {
                 ToolbarItem(placement: .principal) {
                     VStack(content: {
                         Text("\(titleDesc)")
-                           .font(.system(size: 22))
-                           .foregroundColor(isDarkMode ? .white : .black)
-                        Text("\($selectedIndex.wrappedValue)")
-                            .foregroundColor(isDarkMode ? .white : .black)
-
+//                           .font(.system(size: 18))
+                           .foregroundColor(titleColor)
+//                        Text("\(selectedIndex)")
+//                            .foregroundColor(titleColor)
                     })
-            
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         isDarkMode.toggle()
                     } label: {
                         Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
-                            .foregroundColor(isDarkMode ? .white : .black)
+                            .foregroundColor(titleColor)
                     }
                     .padding(.trailing, 6)
                 }
@@ -68,6 +72,15 @@ struct WeChatImageViewer: View {
         router.back()
     }
 }
+
+#Preview("图片预览") {
+    NImagePreviewer(
+        images: Resource.image.urls.range(start: 0, end: 9),
+        selectedIndex: 3,
+        isPresented: .constant(true)
+    )
+}
+
 
 struct ImagePagerView: UIViewControllerRepresentable {
     let imageUrls: [String]
@@ -391,4 +404,4 @@ extension ImageViewController: UIGestureRecognizerDelegate {
         }
         return true
     }
-} 
+}

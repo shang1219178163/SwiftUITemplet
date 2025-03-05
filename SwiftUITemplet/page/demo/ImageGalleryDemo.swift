@@ -37,6 +37,12 @@ struct ImageGalleryDemo: View {
                 LazyVGrid(columns: columns, spacing: 8) {
                     ForEach(imageUrls.indices, id: \.self) { index in
                         WebImage(url: URL(string: imageUrls[index]))
+//                            .placeholder {
+//                                Image(systemName: "photo")
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fit)
+//                                    .foregroundColor(.gray)
+//                            }
                             .resizable()
                             .indicator(.activity)
                             .transition(.fade(duration: 0.5))

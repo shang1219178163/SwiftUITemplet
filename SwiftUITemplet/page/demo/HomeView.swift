@@ -43,7 +43,7 @@ struct HomeView: View {
         RouterModel(name: "PagerViewDemo", route: AppRouter.pager),
         RouterModel(name: "UnknowView", route: AppRouter.unknow),
         RouterModel(name: "CustomView", route: AppRouter.custom),
-        RouterModel(name: "TestView", route: AppRouter.test),
+        RouterModel(name: "TabTestView", route: AppRouter.test),
         RouterModel(name: "imageGalleryDemo", route: AppRouter.imageGalleryDemo),
 
         

@@ -28,7 +28,7 @@ struct TabbarView: View {
                 }
                 .tag(1)
             
-            TestView()
+            TabTestView()
                 .tabItem {
                     Label("Test", systemImage: "gearshape.fill")
                 }
