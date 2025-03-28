@@ -25,6 +25,7 @@ class AppRouter {
     
     // 自定义组件
     static let wrap = "/wrap"
+    static let circleLayout = "/circleLayout"
     static let pager = "/pager"
     static let unknow = "/unknow"
     static let custom = "/custom"
@@ -124,6 +125,7 @@ class RouteRegistry {
             
             // 自定义组件
             (AppRouter.wrap, { _ in AnyView(WrapDemo()) }, { _ in "Wrap示例" }),
+            (AppRouter.circleLayout, { _ in AnyView(CircleLayoutDemo()) }, { _ in "Circle示例" }),
             (AppRouter.pager, { _ in AnyView(PagerViewDemo()) }, { _ in "分页视图" }),
             (AppRouter.unknow, { _ in AnyView(UnknowView()) }, { _ in "未知页面" }),
             (AppRouter.custom, { _ in AnyView(CustomView()) }, { _ in "自定义视图" }),

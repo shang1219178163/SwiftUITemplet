@@ -1,0 +1,6 @@
+framework module Pods_SwiftUITemplet {
+  umbrella header "Pods-SwiftUITemplet-umbrella.h"
+
+  export *
+  module * { export * }
+}

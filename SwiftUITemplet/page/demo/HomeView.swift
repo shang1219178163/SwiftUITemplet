@@ -40,6 +40,7 @@ struct HomeView: View {
     
     var items = [
         RouterModel(name: "WrapDemo", route: AppRouter.wrap),
+        RouterModel(name: "circleLayout", route: AppRouter.circleLayout),
         RouterModel(name: "PagerViewDemo", route: AppRouter.pager),
         RouterModel(name: "UnknowView", route: AppRouter.unknow),
         RouterModel(name: "CustomView", route: AppRouter.custom),
