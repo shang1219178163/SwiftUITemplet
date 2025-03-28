@@ -9,8 +9,8 @@ import SwiftUI
 
 /// 页面导航
 struct NavView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
     
     // 1. NavigationView 示例状态
     @State private var isNavigationActive = false
@@ -26,7 +26,7 @@ struct NavView: View {
     @State private var isPopoverPresented = false
 
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             VStack(alignment: .leading, spacing: 16, content: {
                
                 
@@ -126,12 +126,10 @@ struct NavView: View {
                  }
                 
             })
-            .navigationDestination(for: HashableAnyView.self) { view in
-               view.view
-           }
-            .navigationTitle(
-                "\(clsName)"
-            )
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
            }
     }
 }

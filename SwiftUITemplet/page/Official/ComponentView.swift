@@ -9,8 +9,8 @@ import SwiftUI
 
 /// 基础组件
 struct ComponentView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
 
     @State private var username: String = ""
     @State private var password: String = ""
@@ -27,7 +27,7 @@ struct ComponentView: View {
     
     
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             
             // ScrollView
             ScrollView(.vertical, showsIndicators: true) {
@@ -243,12 +243,10 @@ struct ComponentView: View {
                 
                 
             }
-            .navigationDestination(for: HashableAnyView.self) { view in
-               view.view
-           }
-            .navigationTitle(
-                "\(clsName)"
-            )
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
            }
     }
     

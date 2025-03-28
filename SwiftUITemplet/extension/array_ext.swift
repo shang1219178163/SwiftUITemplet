@@ -16,5 +16,10 @@ extension Array {
         self = (0..<count).map(generator)
     }
     
+    /// 子数组
+    func range(start: Int = 0, end: Int) -> Array {
+        return Array(self[start...end])
+    }
  
 }
+

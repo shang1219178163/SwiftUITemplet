@@ -8,20 +8,80 @@
 import SwiftUI
 
 struct ContentView: View {
-//       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+    @StateObject private var router = Router.shared
+    
+    /// 隐藏 TabBar
+    var hideTabBar: Visibility {
+        let result = router.path.isEmpty
+        return result ? .visible : .hidden
+    }
 
-//    @Binding private var text: String;
-//    @State private var text: String = ""
-
+    
     var body: some View {
-        TabbarView()
+        TabView(selection: $router.selectedTab) {
+            NavigationStack(path: $router.path) {
+                TabHomeView()
+                    .navigationBar(title: "首页", hideBack: true)
+
+            }
+            .toolbar(hideTabBar, for: .tabBar)
+            .tabItem {
+                Image(systemName: "house.fill")
+                Text("首页")
+            }
+            .tag(0)
+            
+            NavigationStack(path: $router.path) {
+                TabMessageView()
+                    .navigationBar(title: "消息", hideBack: true)
+            }
+            .toolbar(hideTabBar, for: .tabBar)
+            .tabItem {
+                Image(systemName: "message.fill")
+                Text("发现")
+            }
+            .tag(1)
+            
+            NavigationStack(path: $router.path) {
+                TabFindView()
+                    .navigationBar(title: "发现", hideBack: true)
+            }
+            .toolbar(hideTabBar, for: .tabBar)
+            .tabItem {
+                Image(systemName: "safari.fill")
+                Text("发现")
+            }
+            .tag(2)
+            
+            NavigationStack(path: $router.path) {
+                TabTestView()
+                    .navigationBar(title: "测试", hideBack: true)
+            }
+            .toolbar(hideTabBar, for: .tabBar)
+            .tabItem {
+                Image(systemName: "infinity.circle")
+                Text("测试")
+            }
+            .tag(3)
+            
+            NavigationStack(path: $router.path) {
+                TabProfileView()
+                    .navigationBar(title: "我的", hideBack: true)
+            }
+            .toolbar(hideTabBar, for: .tabBar)
+            .tabItem {
+                Image(systemName: "person.fill")
+                Text("我的")
+            }
+            .tag(4)
+            
+  
+        }
+
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
+        .environmentObject(Router.shared)
 }

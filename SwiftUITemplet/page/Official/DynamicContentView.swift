@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DynamicContentView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
     
     // 1. 列表数据源
     let items = ["Apple", "Banana", "Orange", "Grapes", "Mango"]
@@ -22,7 +22,7 @@ struct DynamicContentView: View {
       
 
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
 //            ScrollView(.vertical, showsIndicators: true) {
                 
                 VStack(alignment: .leading, spacing: 10, content: {
@@ -101,12 +101,10 @@ struct DynamicContentView: View {
             
                 })
 //            }
-            .navigationDestination(for: HashableAnyView.self) { view in
-               view.view
-           }
-            .navigationTitle(
-                "\(clsName)"
-            ).navigationBarTitleDisplayMode(.inline)
+                .navigationBar(title: "\(clsName)")
+      //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+      //                page.makeView()
+      //            }
        }
     }
     

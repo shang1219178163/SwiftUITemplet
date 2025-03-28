@@ -9,8 +9,8 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct UnknowView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
     
     let items = Array(count: 12) { i in
         "选项_\(i)\("z" * i)"
@@ -21,7 +21,7 @@ struct UnknowView: View {
     
     
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading, spacing: 10, content: {
                     
@@ -53,12 +53,10 @@ struct UnknowView: View {
 
                 }).ignoresSafeArea()
             })
-            .navigationDestination(for: HashableAnyView.self) { view in
-                view.view
-            }
-            .navigationTitle(
-                "\(clsName)"
-            ).navigationBarTitleDisplayMode(.inline)
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
         }
     }
 }

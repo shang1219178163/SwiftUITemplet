@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct BaseView: View {
-    @StateObject private var pathModel = NavManager.shared
+    @StateObject private var router = Router.shared
 
     
     var body: some View {
-        NavigationStack(path: $pathModel.path) {
+        NavigationStack(path: $router.path) {
             ScrollView(.vertical, showsIndicators: true) {
                 
                 VStack(alignment: .leading, spacing: 10, content: {
@@ -20,12 +20,10 @@ struct BaseView: View {
                     Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
                 })
             }
-            .navigationDestination(for: HashableAnyView.self) { view in
-                view.view
-            }
-            .navigationTitle(
-                "\(clsName)"
-            )
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
         }
     }
 }
@@ -36,7 +34,7 @@ struct BaseView: View {
 
 
 
-struct RouterModel: Hashable {
+struct BaseRouterModel: Hashable {
 
     let name: String
     let view: any View
@@ -48,7 +46,7 @@ struct RouterModel: Hashable {
     }
 
     // 实现符合 Hashable 协议的 == 操作符
-    static func == (lhs: RouterModel, rhs: RouterModel) -> Bool {
+    static func == (lhs: BaseRouterModel, rhs: BaseRouterModel) -> Bool {
         return String(describing: type(of: lhs.view)) == String(describing: type(of: rhs.view))
     }
 }

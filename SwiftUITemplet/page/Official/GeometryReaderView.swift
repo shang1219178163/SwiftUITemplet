@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct GeometryReaderView: View {
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
     
     
     var body: some View {

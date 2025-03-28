@@ -10,8 +10,8 @@ import SwiftUI
 /// 基础动画效果
 struct AnimatePageView: View {
     
-       //    @State private var path = NavigationPath()
-    @StateObject private var navManager = NavManager.shared
+       
+    @StateObject private var router = Router.shared
 
     // 1. 基础动画：改变视图大小
     @State private var isExpanded = false
@@ -30,7 +30,7 @@ struct AnimatePageView: View {
     
     
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             
             // ScrollView
             ScrollView(.vertical, showsIndicators: true) {
@@ -119,13 +119,10 @@ struct AnimatePageView: View {
                 })
                 .frame(maxWidth: .infinity)
             }
-     
-            .navigationDestination(for: HashableAnyView.self) { view in
-               view.view
-           }
-            .navigationTitle(
-                "\(clsName)"
-            )
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
        }
     }
     

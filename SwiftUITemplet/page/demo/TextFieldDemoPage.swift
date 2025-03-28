@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TextFieldDemoPage: View {
-    @StateObject private var navManager = NavManager.shared
+    @StateObject private var router = Router.shared
 
     @State var account: String = ""
     @State var password: String = ""
@@ -16,7 +16,7 @@ struct TextFieldDemoPage: View {
     @State var emailAddress: String = ""
     
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $router.path) {
             Form {
                 Section(header: Text("结果展示区")) {
                     Text("账号: \(self.account)")
@@ -69,13 +69,10 @@ struct TextFieldDemoPage: View {
                     }
                 }
             }
-            .navigationDestination(for: HashableAnyView.self) { view in
-                view.view
-            }
-            .navigationTitle(
-                "\(clsName)"
-            )
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBar(title: "\(clsName)")
+  //            .navigationDestination(for: AppPage<AnyView>.self) { page in
+  //                page.makeView()
+  //            }
         }
     }
 }
