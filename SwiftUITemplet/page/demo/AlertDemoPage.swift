@@ -1,5 +1,5 @@
 //
-//  SheetDemoPage.swift
+//  AlertDemoPage.swift
 //  SwiftUITemplet
 //
 //  Created by Bin Shang on 2025/2/27.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SheetDemoPage: View {
+struct AlertDemoPage: View {
     
     @StateObject private var router = Router.shared
     @State var showAlert: Bool = false
@@ -20,7 +20,7 @@ struct SheetDemoPage: View {
           ScrollView(.vertical, showsIndicators: true) {
               
               VStack(alignment: .leading, spacing: 10, content: {
-                  NSectionView(title: "Sheet", desc: "", content: {
+                  NSectionView(title: "Alert", desc: "", content: {
                       
                       TextButon(title: "Alert", action: {
                           DDLog("Alert")
@@ -34,8 +34,8 @@ struct SheetDemoPage: View {
                           )
                       })
                       
-                      TextButon(title: "actionSheet", action: {
-                          DDLog("actionSheet")
+                      TextButon(title: "ActionSheet", action: {
+                          DDLog("ActionSheet")
                           self.showSheet = true
 
                       }).actionSheet(isPresented: $showSheet, content: {
@@ -61,13 +61,13 @@ struct SheetDemoPage: View {
                       }).sheet(isPresented: $showPop, content: {
                           if #available(iOS 16.0, *) {
                               NavigationStack {
-                                  PopLayerVeiew()
+                                  PopupView()
                               }
-          //                    .presentationDetents([.medium, .large])
-                              .presentationDetents([.height(600),])
+                              .presentationDetents([
+                                .fraction(0.1), .medium, .large])
                               .presentationDragIndicator(.visible)
                           } else {
-                              PopLayerVeiew()
+                              PopupView()
                           }
                       })
                   })
@@ -83,11 +83,12 @@ struct SheetDemoPage: View {
 }
 
 #Preview {
-    SheetDemoPage()
+    AlertDemoPage()
 }
 
 
-struct PopLayerVeiew: View {
+/// 弹窗页面
+struct PopupView: View {
 
     @Environment(\.presentationMode) var presentationMode
 
