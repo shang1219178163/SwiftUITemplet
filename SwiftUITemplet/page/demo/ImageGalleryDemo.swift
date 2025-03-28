@@ -21,7 +21,7 @@ struct ImageGalleryDemo: View {
             VStack {
                 content
             }
-            .navigationBar(title: "图片预览")
+            .navigationBarCustom(title: "图片预览")
             .onAppear {
                 router.isPresented = true
                 DDLog("onAppear \(router.path == router.path)")

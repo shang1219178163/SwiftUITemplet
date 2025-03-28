@@ -24,7 +24,7 @@ struct CircleLayoutDemo: View {
                         Text(String(format: "%.2f", $spacing.wrappedValue))
                     })
                     .padding()
-                    .navigationBar(title: "\(clsName)")
+                    .navigationBarCustom(title: "\(clsName)")
                     //            .navigationDestination(for: AppPage<AnyView>.self) { page in
                     //                page.makeView()
                     //            }

@@ -243,7 +243,7 @@ struct ComponentView: View {
                 
                 
             }
-            .navigationBar(title: "\(clsName)")
+            .navigationBarCustom(title: "\(clsName)")
   //            .navigationDestination(for: AppPage<AnyView>.self) { page in
   //                page.makeView()
   //            }

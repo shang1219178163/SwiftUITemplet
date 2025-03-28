@@ -90,7 +90,7 @@ struct CustomView: View {
                 }
                 .padding(10)
             }
-            .navigationBar(title: "\(clsName)")
+            .navigationBarCustom(title: "\(clsName)")
   //            .navigationDestination(for: AppPage<AnyView>.self) { page in
   //                page.makeView()
   //            }
