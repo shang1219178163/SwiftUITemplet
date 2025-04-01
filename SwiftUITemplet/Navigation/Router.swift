@@ -34,6 +34,9 @@ class AppRouter {
 
     // 第三方
     static let notificationBannerView = "/notificationBannerView"
+    static let fileHelperDemo = "/FileHelperDemo"
+
+    
 
     
     /// 路由
@@ -83,9 +86,8 @@ class AppRouter {
         (AppRouter.imageGalleryDemo, { _ in AnyView(ImageGalleryDemo()) }, { _ in "图片画廊" }),
         (AppRouter.notificationBannerView, { _ in AnyView(NotificationBannerView()) }, { _ in "导航栏通知" }),
         (AppRouter.pickerViewPage, { _ in AnyView(PickerViewPage()) }, { _ in "选择" }),
+        (AppRouter.fileHelperDemo, { _ in AnyView(FileHelperDemo()) }, { _ in "文件选择" }),
 
-        
-        
     ]
 
 }
