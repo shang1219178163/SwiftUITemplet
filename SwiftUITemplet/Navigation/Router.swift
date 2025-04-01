@@ -35,8 +35,7 @@ class AppRouter {
     // 第三方
     static let notificationBannerView = "/notificationBannerView"
     static let fileHelperDemo = "/FileHelperDemo"
-
-    
+    static let modelCodablePage = "/modelCodablePage"
 
     
     /// 路由
@@ -88,6 +87,9 @@ class AppRouter {
         (AppRouter.pickerViewPage, { _ in AnyView(PickerViewPage()) }, { _ in "选择" }),
         (AppRouter.fileHelperDemo, { _ in AnyView(FileHelperDemo()) }, { _ in "文件选择" }),
 
+        (AppRouter.modelCodablePage, { _ in AnyView(ModelCodablePage()) }, { _ in "模型解析" }),
+
+        
     ]
 
 }
