@@ -63,6 +63,7 @@
 		14DF1FE82D9BCBCA00C21C41 /* TagDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FE72D9BCBC500C21C41 /* TagDetail.swift */; };
 		14DF1FEE2D9BE8C200C21C41 /* ModelCodablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FED2D9BE8C200C21C41 /* ModelCodablePage.swift */; };
 		14DF1FF02D9BE8D300C21C41 /* NSmartCodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FEF2D9BE8D300C21C41 /* NSmartCodableModel.swift */; };
+		14DF1FF32D9BEEAA00C21C41 /* BaseTypeCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FF22D9BEE8A00C21C41 /* BaseTypeCodable.swift */; };
 		14E469782D65759800B7372F /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469772D65759800B7372F /* RefreshableScrollView.swift */; };
 		14E4697A2D6577C000B7372F /* Array_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469792D6577C000B7372F /* Array_ext.swift */; };
 		14E4697F2D65931200B7372F /* TableViewExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4697E2D65931200B7372F /* TableViewExample.swift */; };
@@ -177,6 +178,7 @@
 		14DF1FE72D9BCBC500C21C41 /* TagDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetail.swift; sourceTree = "<group>"; };
 		14DF1FED2D9BE8C200C21C41 /* ModelCodablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCodablePage.swift; sourceTree = "<group>"; };
 		14DF1FEF2D9BE8D300C21C41 /* NSmartCodableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSmartCodableModel.swift; sourceTree = "<group>"; };
+		14DF1FF22D9BEE8A00C21C41 /* BaseTypeCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTypeCodable.swift; sourceTree = "<group>"; };
 		14E469762D6572A900B7372F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		14E469772D65759800B7372F /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		14E469792D6577C000B7372F /* Array_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_ext.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		142CB9372A90CCF200CBD9F4 /* SwiftUITemplet */ = {
 			isa = PBXGroup;
 			children = (
+				14DF1FF12D9BEE7D00C21C41 /* protocol */,
 				14F6FA442D9659A600739191 /* IO */,
 				14F741282D66CFFA007C21AD /* Info.plist */,
 				14F741252D66C5EA007C21AD /* Resource */,
@@ -416,6 +419,14 @@
 				14A3F2B42D6DCBE400DA08B4 /* PermissionManager.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		14DF1FF12D9BEE7D00C21C41 /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				14DF1FF22D9BEE8A00C21C41 /* BaseTypeCodable.swift */,
+			);
+			path = protocol;
 			sourceTree = "<group>";
 		};
 		14E469742D65723E00B7372F /* Vender */ = {
@@ -593,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				144668E82D70413100204772 /* TextDemoPage.swift in Sources */,
+				14DF1FF32D9BEEAA00C21C41 /* BaseTypeCodable.swift in Sources */,
 				14780A842D642DE400F8C62D /* UnknowView.swift in Sources */,
 				14A3F2B32D6DCAC900DA08B4 /* Device_ext.swift in Sources */,
 				14780A862D6430C100F8C62D /* ProfileView.swift in Sources */,

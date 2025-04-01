@@ -5,7 +5,7 @@
 //  Created by Bin Shang on 2025/4/1.
 //
 
-struct TagDetail: Codable {
+struct TagDetail: Codable, BaseTypeCodable {
     var name: String?
     var tagId: String?
     
@@ -17,6 +17,10 @@ struct TagDetail: Codable {
     init(name: String? = "", tagId: String? = "") {
         self.name = name
         self.tagId = tagId
+    }
+    
+    static var defaultValue: Self {
+        Self.init(name: String.defaultValue, tagId: String.defaultValue)
     }
     
 
