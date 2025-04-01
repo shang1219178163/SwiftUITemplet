@@ -12,6 +12,28 @@ struct FileHelperDemo: View {
      @StateObject private var router = Router.shared
      
     let fileName = "user.json";
+    
+    let jsonStr = """
+    {
+        "name": "Alice",
+        "age": 25,
+        "hobbies": ["Reading", "Hiking", "Swimming"],
+        "address": {
+            "city": "New York",
+            "zipCode": "10001"
+        },
+        "tags": [
+            {
+                "name": "画家",
+                "tagId": "1000"
+            },
+            {
+                "name": "音乐家",
+                "tagId": "1001"
+            }
+        ]
+    }
+    """
 
     @State private var jsonContent = "";
      
@@ -58,34 +80,13 @@ struct FileHelperDemo: View {
              .navigationBarCustom(title: "\(clsName)")
          }
      }
-    
+
     func modelDecode() {
-        // 测试 JSON 数据
-//        let jsonStr = """
-//        {
-//            "name": "Alice",
-//            "age": 25
-//        }
-//        """
-        
-        
-        let jsonStr = """
-        {
-            "name": "Alice",
-            "age": 25,
-            "hobbies": ["Reading", "Hiking", "Swimming"],
-            "address": {
-                "city": "New York",
-                "zipCode": "10001"
-            }
-        }
-        """
-                
         guard let jsonData = jsonStr.data(using: .utf8) else {
             DDLog("失败: data(using: .utf8) ") // ✅ 解析成功: Alice, 25
             return;
         }
-        
+                
         // 解析 JSON
         guard let userModel = try? JSONDecoder().decode(UserModel.self, from: jsonData) else {
             DDLog("失败: decode") // ✅ 解析成功: Alice, 25
@@ -117,7 +118,8 @@ struct FileHelperDemo: View {
     
     /// 保存对象到默认 plist
     func savePlist() {
-        let userDict: [AnyHashable: Any] = ["name": "Alice", "age": 25, "motto": "一个独立的人"]
+        let userDict = jsonStr.toDictionary() ?? [:];
+//        let userDict: [AnyHashable: Any] = ["name": "Alice", "age": 25, "motto": "一个独立的人"]
         let mergedDict = userDict.merging([
             "hobbies": ["Reading", "Hiking", "Swimming"]
             ]) { (_, new) in new } // 选择新值
@@ -149,8 +151,15 @@ struct FileHelperDemo: View {
         let path = FileHelper.filePath(for: fileName);
         DDLog("\(path)")
 
-        let address = Address(city: "Xian", zipCode: "95678")
-        let user = UserModel(name: "Alice", age: 25, address: address)
+        let user = UserModel(name: "Alice",
+                             age: 25,
+                             address: Address(city: "Xian",
+                                              zipCode: "95678"),
+                             tags: [
+            TagDetail(name: "画家", tagId: "1000"),
+            TagDetail(name: "音乐家", tagId: "1001"),
+        ])
+                      
         FileHelper.writeJSON(fileName: "user.json", data: user)
         
         readJSON()
