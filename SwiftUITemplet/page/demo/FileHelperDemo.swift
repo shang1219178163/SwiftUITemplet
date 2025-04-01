@@ -11,7 +11,9 @@ struct FileHelperDemo: View {
     
      @StateObject private var router = Router.shared
      
+    let fileName = "user.json";
 
+    @State private var jsonContent = "";
      
      var body: some View {
          NavigationStack(path: $router.path) {
@@ -47,7 +49,9 @@ struct FileHelperDemo: View {
                          Button("updateJSON") {
                              updateJSON()
                          }.buttonStyle(BorderedButtonStyle())
+                         
                      }
+                     Text("\(fileName): \(jsonContent)").lineLimit(1000)
 
                  })
              }
@@ -69,7 +73,11 @@ struct FileHelperDemo: View {
         {
             "name": "Alice",
             "age": 25,
-            "hobbies": ["Reading", "Hiking", "Swimming"]
+            "hobbies": ["Reading", "Hiking", "Swimming"],
+            "address": {
+                "city": "New York",
+                "zipCode": "10001"
+            }
         }
         """
                 
@@ -138,14 +146,21 @@ struct FileHelperDemo: View {
     }
     
     func writeJSON() {
-        let user = UserModel(name: "Alice", age: 25)
+        let path = FileHelper.filePath(for: fileName);
+        DDLog("\(path)")
+
+        let address = Address(city: "Xian", zipCode: "95678")
+        let user = UserModel(name: "Alice", age: 25, address: address)
         FileHelper.writeJSON(fileName: "user.json", data: user)
+        
+        readJSON()
     }
     
     func readJSON() {
         if let loadedUser = FileHelper.readJSON(fileName: "user.json", type: UserModel.self) {
-            print("读取到的用户: \(loadedUser.toDictionary()?.jsonString ?? "")")
+//            print("读取到的用户: \(loadedUser.toDictionary()?.jsonString ?? "")")
             print("读取到的用户: \(loadedUser)")
+            jsonContent = loadedUser.toDictionary()?.jsonString ?? "";
         }
     }
     
@@ -153,6 +168,7 @@ struct FileHelperDemo: View {
         FileHelper.updateJSON(fileName: "user.json") { (user: inout UserModel) in
             user.age += 1
         }
+        readJSON()
     }
 }
 
