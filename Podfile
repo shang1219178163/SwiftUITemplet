@@ -17,4 +17,6 @@ target 'SwiftUITemplet' do
   pod 'BBSwiftUIKit', '~> 0.1.0'
   pod 'NotificationBannerSwift', '~> 3.0.0'
   pod 'Then', '~> 3.0.0'
+#  pod 'HandyJSON'
+  pod 'SmartCodable'
 end

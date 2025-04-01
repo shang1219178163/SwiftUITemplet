@@ -61,6 +61,8 @@
 		14DF1FE42D9BC0D000C21C41 /* CustomStringConvertible_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FE32D9BC0C900C21C41 /* CustomStringConvertible_ext.swift */; };
 		14DF1FE62D9BCB5600C21C41 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FE52D9BCB5400C21C41 /* Address.swift */; };
 		14DF1FE82D9BCBCA00C21C41 /* TagDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FE72D9BCBC500C21C41 /* TagDetail.swift */; };
+		14DF1FEE2D9BE8C200C21C41 /* ModelCodablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FED2D9BE8C200C21C41 /* ModelCodablePage.swift */; };
+		14DF1FF02D9BE8D300C21C41 /* NSmartCodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF1FEF2D9BE8D300C21C41 /* NSmartCodableModel.swift */; };
 		14E469782D65759800B7372F /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469772D65759800B7372F /* RefreshableScrollView.swift */; };
 		14E4697A2D6577C000B7372F /* Array_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E469792D6577C000B7372F /* Array_ext.swift */; };
 		14E4697F2D65931200B7372F /* TableViewExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4697E2D65931200B7372F /* TableViewExample.swift */; };
@@ -173,6 +175,8 @@
 		14DF1FE32D9BC0C900C21C41 /* CustomStringConvertible_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStringConvertible_ext.swift; sourceTree = "<group>"; };
 		14DF1FE52D9BCB5400C21C41 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		14DF1FE72D9BCBC500C21C41 /* TagDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetail.swift; sourceTree = "<group>"; };
+		14DF1FED2D9BE8C200C21C41 /* ModelCodablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCodablePage.swift; sourceTree = "<group>"; };
+		14DF1FEF2D9BE8D300C21C41 /* NSmartCodableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSmartCodableModel.swift; sourceTree = "<group>"; };
 		14E469762D6572A900B7372F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		14E469772D65759800B7372F /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		14E469792D6577C000B7372F /* Array_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_ext.swift; sourceTree = "<group>"; };
@@ -314,6 +318,7 @@
 		144668E62D7040EF00204772 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				14DF1FED2D9BE8C200C21C41 /* ModelCodablePage.swift */,
 				14F6FA3E2D96421600739191 /* NotificationBannerView.swift */,
 				14E4697E2D65931200B7372F /* TableViewExample.swift */,
 				14780A7C2D642D8200F8C62D /* HomeView.swift */,
@@ -371,6 +376,7 @@
 				147766762D647C4000458842 /* Data.swift */,
 				147766792D647C4000458842 /* Profile.swift */,
 				1477667A2D647C4000458842 /* UserData.swift */,
+				14DF1FEF2D9BE8D300C21C41 /* NSmartCodableModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -655,6 +661,7 @@
 				14DF1FE02D9B7CB000C21C41 /* Dictionary_ext.swift in Sources */,
 				14F6FA3D2D96384E00739191 /* LaunchScreenViewController.swift in Sources */,
 				148B78C12D67351100B767F3 /* BaseView.swift in Sources */,
+				14DF1FEE2D9BE8C200C21C41 /* ModelCodablePage.swift in Sources */,
 				14F6FA432D9654B500739191 /* CustomButtonStyle.swift in Sources */,
 				14E469892D65CCD800B7372F /* Geometry_ext.swift in Sources */,
 				14E469962D65E6D400B7372F /* RoundedCorner.swift in Sources */,
@@ -669,6 +676,7 @@
 				14A3F2B72D6DCDD700DA08B4 /* UIApplication_ext.swift in Sources */,
 				14DF1FE82D9BCBCA00C21C41 /* TagDetail.swift in Sources */,
 				147766842D64902500458842 /* log.swift in Sources */,
+				14DF1FF02D9BE8D300C21C41 /* NSmartCodableModel.swift in Sources */,
 				14F6FA412D964AAA00739191 /* PickerViewPage.swift in Sources */,
 				14DF1FE42D9BC0D000C21C41 /* CustomStringConvertible_ext.swift in Sources */,
 				14E469872D65C80B00B7372F /* AnimatePageView.swift in Sources */,
