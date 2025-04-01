@@ -20,7 +20,7 @@ struct BaseView: View {
                     Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
                 })
             }
-            .navigationBar(title: "\(clsName)")
+            .navigationBarCustom(title: "\(clsName)")
   //            .navigationDestination(for: AppPage<AnyView>.self) { page in
   //                page.makeView()
   //            }

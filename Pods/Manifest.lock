@@ -4,50 +4,66 @@ PODS:
   - DGCharts (5.1.0):
     - DGCharts/Core (= 5.1.0)
   - DGCharts/Core (5.1.0)
+  - MarqueeLabel (4.0.5)
   - MJRefresh (3.7.9)
+  - NotificationBannerSwift (3.0.6):
+    - MarqueeLabel (~> 4.0.5)
+    - SnapKit (~> 5.0.1)
   - SDWebImage (5.21.0):
     - SDWebImage/Core (= 5.21.0)
   - SDWebImage/Core (5.21.0)
   - SDWebImageSwiftUI (3.1.3):
     - SDWebImage (~> 5.10)
+  - SnapKit (5.0.1)
   - SwiftDate (7.0.0)
   - SwiftUIIntrospect (1.3.0)
   - SwiftUIX (0.0.3)
+  - Then (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.10.2)
   - BBSwiftUIKit (~> 0.1.0)
   - DGCharts (~> 5.1.0)
   - MJRefresh (~> 3.7.9)
+  - NotificationBannerSwift (~> 3.0.0)
   - SDWebImage
   - SDWebImageSwiftUI (~> 3.1.3)
   - SwiftDate (~> 7.0.0)
   - SwiftUIIntrospect (~> 1.3.0)
   - SwiftUIX (~> 0.0.3)
+  - Then (~> 3.0.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - BBSwiftUIKit
     - DGCharts
+    - MarqueeLabel
     - MJRefresh
+    - NotificationBannerSwift
     - SDWebImage
     - SDWebImageSwiftUI
+    - SnapKit
     - SwiftDate
     - SwiftUIIntrospect
     - SwiftUIX
+    - Then
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   BBSwiftUIKit: 4cff8ce7d7dabaa2a161b6435323bfae9eb14fed
   DGCharts: 1c6daf585b6cfc78807af44ea690d357c410627f
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   MJRefresh: ff9e531227924c84ce459338414550a05d2aea78
+  NotificationBannerSwift: 7021be2338f8f29cf424b0aca43da462bf9e2a1a
   SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
   SDWebImageSwiftUI: a6d7129fb68fc18c8b930b869ddcfce314e49ded
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftDate: bbc26e26fc8c0c33fbee8c140c5e8a68293a148a
   SwiftUIIntrospect: fee9aa07293ee280373a591e1824e8ddc869ba5d
   SwiftUIX: 3348c2b1eec70c3edfe039fdf1388af2b0155b2b
+  Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 25a831633ef274af26cb922e7780dc1b90d92212
+PODFILE CHECKSUM: b6a558744c16e71904192f37493383743a4dd1a6
 
 COCOAPODS: 1.15.2

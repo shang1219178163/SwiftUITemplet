@@ -21,7 +21,7 @@ struct ContentView: View {
         TabView(selection: $router.selectedTab) {
             NavigationStack(path: $router.path) {
                 TabHomeView()
-                    .navigationBar(title: "首页", hideBack: true)
+                    .navigationBarCustom(title: "首页", hideBack: true)
 
             }
             .toolbar(hideTabBar, for: .tabBar)
@@ -33,7 +33,7 @@ struct ContentView: View {
             
             NavigationStack(path: $router.path) {
                 TabMessageView()
-                    .navigationBar(title: "消息", hideBack: true)
+                    .navigationBarCustom(title: "消息", hideBack: true)
             }
             .toolbar(hideTabBar, for: .tabBar)
             .tabItem {
@@ -44,7 +44,7 @@ struct ContentView: View {
             
             NavigationStack(path: $router.path) {
                 TabFindView()
-                    .navigationBar(title: "发现", hideBack: true)
+                    .navigationBarCustom(title: "发现", hideBack: true)
             }
             .toolbar(hideTabBar, for: .tabBar)
             .tabItem {
@@ -55,7 +55,7 @@ struct ContentView: View {
             
             NavigationStack(path: $router.path) {
                 TabTestView()
-                    .navigationBar(title: "测试", hideBack: true)
+                    .navigationBarCustom(title: "测试", hideBack: true)
             }
             .toolbar(hideTabBar, for: .tabBar)
             .tabItem {
@@ -66,7 +66,7 @@ struct ContentView: View {
             
             NavigationStack(path: $router.path) {
                 TabProfileView()
-                    .navigationBar(title: "我的", hideBack: true)
+                    .navigationBarCustom(title: "我的", hideBack: true)
             }
             .toolbar(hideTabBar, for: .tabBar)
             .tabItem {

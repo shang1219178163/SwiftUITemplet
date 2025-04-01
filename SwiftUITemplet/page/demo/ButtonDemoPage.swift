@@ -27,11 +27,24 @@ struct ButtonDemoPage: View {
                 
                 VStack(alignment: .leading, spacing: 10, content: {
                     NSectionView(title: "Button", desc: "", content: {
+                        
+                        Wrap(alignment: .leading) {
+                            Button("Default") {}.buttonStyle(DefaultButtonStyle())
+                            Button("Plain") {}.buttonStyle(PlainButtonStyle())
+                            Button("Bordered") {}.buttonStyle(BorderedButtonStyle())
+                            Button("Prominent") {}.buttonStyle(BorderedProminentButtonStyle())
+                            
+                            Button("CustomButtonStyle") {
+                                DDLog("CustomButtonStyle")
+                            }
+                            .buttonStyle(CustomButtonStyle())
+                        }
+                        
                         Button(action: {
                             DDLog("普通按钮")
                         }, label: {
-                            Text("普通按钮\n字体 24, \n白色, \n绿色背景色, \n圆角 8, \n红色边框线 2, \n抗锯齿, \n透明度 1.0")
-                                .font(.system(size: 24))
+                            Text("普通按钮\n字体 20, \n白色, \n绿色背景色, \n圆角 8, \n红色边框线 2, \n抗锯齿, \n透明度 1.0")
+                                .font(.system(size: 20))
                                 .foregroundColor(.white)
                         })
                         .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
@@ -62,6 +75,9 @@ struct ButtonDemoPage: View {
                             )
 //                            .cornerRadius(40)
                         })
+             
+
+                        
                     })
                     NSectionView(title: "Toggle", desc: "", content: {
                         Toggle(isOn: $isToggle) {
@@ -179,7 +195,7 @@ struct ButtonDemoPage: View {
                 
                 }).padding(10)
             }
-            .navigationBar(title: "\(clsName)")
+            .navigationBarCustom(title: "\(clsName)")
   //            .navigationDestination(for: AppPage<AnyView>.self) { page in
   //                page.makeView()
   //            }

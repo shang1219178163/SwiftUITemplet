@@ -26,29 +26,9 @@ struct HomeView: View {
     
     @StateObject private var router = Router.shared
     
-
-    /// 系统相关组件
-    var systemItems = [
-        RouterModel(name: "AnimatePageView", route: AppRouter.animatePage),
-        RouterModel(name: "ComponentView", route: AppRouter.component),
-        RouterModel(name: "CustomeModifierView", route: AppRouter.customeModifier),
-        RouterModel(name: "DynamicContentView", route: AppRouter.dynamicContent),
-        RouterModel(name: "GeometryReaderView", route: AppRouter.geometryReader),
-        RouterModel(name: "GestureView", route: AppRouter.gesture),
-        RouterModel(name: "NavView", route: AppRouter.nav),
-    ]
-    
-    var items = [
-        RouterModel(name: "WrapDemo", route: AppRouter.wrap),
-        RouterModel(name: "circleLayout", route: AppRouter.circleLayout),
-        RouterModel(name: "PagerViewDemo", route: AppRouter.pager),
-        RouterModel(name: "UnknowView", route: AppRouter.unknow),
-        RouterModel(name: "CustomView", route: AppRouter.custom),
-        RouterModel(name: "TabTestView", route: AppRouter.test),
-        RouterModel(name: "imageGalleryDemo", route: AppRouter.imageGalleryDemo),
-
-        
-    ]
+    var items = AppRouter.pages.map({ e in
+        return RouterModel(name: e.0, route: e.0)
+    });
     
     
     let data: [String] = ["Item 1", "Item 2", "Item 3", "Item 4"]
@@ -78,14 +58,6 @@ struct HomeView: View {
     
     private func SystemItemsSection() -> some View {
         Section(header: Text("页面").font(.headline)) {
-            ForEach(systemItems, id: \.self) { item in
-                RouterItemView(item: item, avatar: avatar)
-                    .onTapGesture {
-                        DDLog("onTapGesture")
-                        router.toNamed(item.route)
-                    }
-            }
-            
             ForEach(items, id: \.self) { item in
                 RouterItemView(item: item, avatar: avatar)
                     .onTapGesture {

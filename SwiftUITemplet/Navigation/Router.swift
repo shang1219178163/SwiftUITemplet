@@ -30,7 +30,14 @@ class AppRouter {
     static let unknow = "/unknow"
     static let custom = "/custom"
     static let test = "/test"
+    static let pickerViewPage = "/pickerViewPage"
+
+    // 第三方
+    static let notificationBannerView = "/notificationBannerView"
+    static let fileHelperDemo = "/FileHelperDemo"
+
     
+
     
     /// 路由
     static let pages: [(String, ([String: Any]) -> AnyView, ([String: Any]) -> String)] = [
@@ -76,7 +83,11 @@ class AppRouter {
         (AppRouter.unknow, { _ in AnyView(UnknowView()) }, { _ in "未知页面" }),
         (AppRouter.custom, { _ in AnyView(CustomView()) }, { _ in "自定义视图" }),
         (AppRouter.test, { _ in AnyView(TabTestView()) }, { _ in "测试页面" }),
-        (AppRouter.imageGalleryDemo, { _ in AnyView(ImageGalleryDemo()) }, { _ in "图片画廊" })
+        (AppRouter.imageGalleryDemo, { _ in AnyView(ImageGalleryDemo()) }, { _ in "图片画廊" }),
+        (AppRouter.notificationBannerView, { _ in AnyView(NotificationBannerView()) }, { _ in "导航栏通知" }),
+        (AppRouter.pickerViewPage, { _ in AnyView(PickerViewPage()) }, { _ in "选择" }),
+        (AppRouter.fileHelperDemo, { _ in AnyView(FileHelperDemo()) }, { _ in "文件选择" }),
+
     ]
 
 }
@@ -360,11 +371,11 @@ struct ScaleTransition: ViewModifier {
 }
 
 extension View {
-    func navigationBar(title: String, titleColor: Color = .primary, hideBack: Bool = false) -> some View {
+    func navigationBarCustom(title: String, titleColor: Color = .primary, hideBack: Bool = false) -> some View {
         modifier(NavigationBarModifier(title: title, titleColor: titleColor, hideBack: hideBack))
     }
     
-    func scaleTransition(isPresented: Bool) -> some View {
+    func scaleTransitionCustom(isPresented: Bool) -> some View {
         modifier(ScaleTransition(isPresented: isPresented))
     }
 } 

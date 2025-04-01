@@ -38,7 +38,7 @@ struct NImagePreviewer: View {
                     onBack: onBack
                 )
             }
-            .navigationBar(title: "\(titleDesc)", titleColor: titleColor)
+            .navigationBarCustom(title: "\(titleDesc)", titleColor: titleColor)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     VStack(content: {
