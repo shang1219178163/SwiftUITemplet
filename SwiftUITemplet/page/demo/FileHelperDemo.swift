@@ -92,7 +92,7 @@ struct FileHelperDemo: View {
             DDLog("失败: decode") // ✅ 解析成功: Alice, 25
             return;
         }
-        DDLog("userModel.toDictionary(): \(userModel.toDictionary() ?? [:])")
+        DDLog("userModel.toDict(): \(userModel.toDict() ?? [:])")
 
         guard let data = try? JSONEncoder().encode(userModel),
         let dataString = String(data: data, encoding: .utf8) else {
@@ -102,30 +102,30 @@ struct FileHelperDemo: View {
         DDLog("dataString: \(dataString)")
 
         
-        if let userDict = userModel.toDictionary() {
+        if let userDict = userModel.toDict() {
             DDLog(userDict) // ✅ 输出: ["name": "Alice", "age": 25]
         }
         
         let userDict: [AnyHashable: Any] = ["name": "Alice", "age": 25, "motto": "一个独立的人"]
-        guard let user = UserModel.fromDictionary(userDict) else {
-            DDLog("UserModel.fromDictionary 失败")
+        guard let user = UserModel.fromDict(userDict) else {
+            DDLog("UserModel.fromDict 失败")
             return
         }
         
-        DDLog([userDict == user.toDictionary()])
+        DDLog([userDict == user.toDict()])
         
     }
     
     /// 保存对象到默认 plist
     func savePlist() {
-        let userDict = jsonStr.toDictionary() ?? [:];
+        let userDict = jsonStr.toDict() ?? [:];
 //        let userDict: [AnyHashable: Any] = ["name": "Alice", "age": 25, "motto": "一个独立的人"]
         let mergedDict = userDict.merging([
             "hobbies": ["Reading", "Hiking", "Swimming"]
             ]) { (_, new) in new } // 选择新值
-        guard let user = UserModel.fromDictionary(userDict) ,
-            let userModel = UserModel.fromDictionary(mergedDict) else {
-            DDLog("UserModel.fromDictionary 失败")
+        guard let user = UserModel.fromDict(userDict) ,
+            let userModel = UserModel.fromDict(mergedDict) else {
+            DDLog("UserModel.fromDict 失败")
             return
         }
         
@@ -136,7 +136,7 @@ struct FileHelperDemo: View {
         
         let userNew = UserDefaults().load(UserModel.self, forKey:  "user")
         let userModelNew = UserDefaults().load(UserModel.self, forKey:  "userModel")
-        DDLog([userNew?.toDictionary(), userModelNew?.toDictionary()])
+        DDLog([userNew?.toDict(), userModelNew?.toDict()])
     }
     
     func createFile() {
@@ -167,9 +167,9 @@ struct FileHelperDemo: View {
     
     func readJSON() {
         if let loadedUser = FileHelper.readJSON(fileName: "user.json", type: UserModel.self) {
-//            print("读取到的用户: \(loadedUser.toDictionary()?.jsonString ?? "")")
+//            print("读取到的用户: \(loadedUser.toDict()?.jsonString ?? "")")
             print("读取到的用户: \(loadedUser)")
-            jsonContent = loadedUser.toDictionary()?.jsonString ?? "";
+            jsonContent = loadedUser.toDict()?.jsonString ?? "";
         }
     }
     

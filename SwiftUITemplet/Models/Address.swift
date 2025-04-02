@@ -42,7 +42,7 @@ struct Address: Codable, BaseTypeCodable {
         let type = "\(type(of: self))"
 //        let type =  String(describing: Self.self)
         
-        guard let result = self.toDictionary()?.jsonString else {
+        guard let result = toDict()?.jsonString else {
             return "\(type) 实例对象"
         }
         return "\(type) \(result)";

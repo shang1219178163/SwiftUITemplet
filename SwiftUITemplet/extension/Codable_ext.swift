@@ -8,7 +8,7 @@
 
 public extension Encodable {
     /// **模型转字典**
-    func toDictionary() -> [AnyHashable: Any]? {
+    func toDict() -> [AnyHashable: Any]? {
         guard let data = try? JSONEncoder().encode(self) else {
             return nil
         }
@@ -21,7 +21,7 @@ public extension Encodable {
 
 public extension Decodable {
     /// **字典转模型**
-    static func fromDictionary(_ dict: [AnyHashable: Any]) -> Self? {
+    static func fromDict(_ dict: [AnyHashable: Any]) -> Self? {
         guard let data = try? JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed) else {
             return nil
         }
