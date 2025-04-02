@@ -38,6 +38,9 @@ class AppRouter {
     static let modelCodablePage = "/modelCodablePage"
     static let locationDemo = "/locationDemo"
 
+    // 新增
+    static let dataTypeDemo = "/dataTypeDemo"
+
     
     /// 路由
     static let pages: [(String, ([String: Any]) -> AnyView, ([String: Any]) -> String)] = [
@@ -92,7 +95,8 @@ class AppRouter {
 
         (AppRouter.locationDemo, { _ in AnyView(LocationDemo()) }, { _ in "地图功能" }),
 
-        
+        (AppRouter.dataTypeDemo, { _ in AnyView(DataTypeDemo()) }, { _ in "数据类型" }),
+
     ]
 
 }
