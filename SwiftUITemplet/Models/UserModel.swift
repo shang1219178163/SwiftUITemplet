@@ -9,7 +9,7 @@ import Foundation
 
 
 /// 自定义用户模型
-struct UserModel: Codable, CustomStringConvertible {
+struct UserModel: Codable, CustomStringConvertible, BaseTypeCodable {
     var name: String
     var age: Int
     /// 座右铭
@@ -42,6 +42,15 @@ struct UserModel: Codable, CustomStringConvertible {
         self.tags = tags
     }
     
+    public static var defaultValue: Self {
+        Self.init(name: String.defaultValue,
+                  age: Int.defaultValue,
+                  motto: String?.defaultValue,
+                  hobbies: Array<String>.defaultValue,
+                  address: Address.defaultValue,
+                  tags: Array<TagDetail>.defaultValue
+        )
+    }
 
     // 自定义 JSON 解析
     init(from decoder: any Decoder) throws {
@@ -70,7 +79,7 @@ struct UserModel: Codable, CustomStringConvertible {
         let type = "\(type(of: self))"
 //        let type =  String(describing: Self.self)
         
-        guard let result = self.toDictionary()?.jsonString else {
+        guard let result = toDict()?.jsonString else {
             return "\(type) 实例对象"
         }
         return "\(type) \(result)";

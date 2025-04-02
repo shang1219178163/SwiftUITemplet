@@ -6,7 +6,7 @@
 //
 
 
-struct Address: Codable {
+struct Address: Codable, BaseTypeCodable {
     var city: String?
     var zipCode: String?
     
@@ -20,6 +20,9 @@ struct Address: Codable {
         self.zipCode = zipCode
     }
     
+    static var defaultValue: Self {
+        Self.init(city: String.defaultValue, zipCode: String.defaultValue)
+    }
 
     // 自定义 JSON 解析
     init(from decoder: any Decoder) throws {
@@ -39,7 +42,7 @@ struct Address: Codable {
         let type = "\(type(of: self))"
 //        let type =  String(describing: Self.self)
         
-        guard let result = self.toDictionary()?.jsonString else {
+        guard let result = toDict()?.jsonString else {
             return "\(type) 实例对象"
         }
         return "\(type) \(result)";
