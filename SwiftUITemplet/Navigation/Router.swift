@@ -356,8 +356,8 @@ struct NavigationBarModifier: ViewModifier {
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
-                if !hideBack {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if !hideBack {
                         Button {
                             onBack?() ?? router.back()
                         } label: {
