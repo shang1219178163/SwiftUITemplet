@@ -38,6 +38,9 @@ class AppRouter {
     static let modelCodablePage = "/modelCodablePage"
     static let locationDemo = "/locationDemo"
 
+    // 新增
+    static let dataTypeDemo = "/dataTypeDemo"
+
     
     /// 路由
     static let pages: [(String, ([String: Any]) -> AnyView, ([String: Any]) -> String)] = [
@@ -92,7 +95,8 @@ class AppRouter {
 
         (AppRouter.locationDemo, { _ in AnyView(LocationDemo()) }, { _ in "地图功能" }),
 
-        
+        (AppRouter.dataTypeDemo, { _ in AnyView(DataTypeDemo()) }, { _ in "数据类型" }),
+
     ]
 
 }
@@ -326,14 +330,18 @@ struct NavigationBarModifier: ViewModifier {
     let title: String
     let titleColor: Color
     let hideBack: Bool
+    
+    let onBack: (() -> Void)?
+    
 
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var router = Router.shared
     
-    init(title: String, titleColor: Color = .primary, hideBack: Bool = false) {
+    init(title: String, titleColor: Color = .primary, hideBack: Bool = false, onBack: (() -> Void)? = nil) {
         self.title = title
         self.titleColor = titleColor
         self.hideBack = hideBack
+        self.onBack = onBack
     }
     
     func body(content: Content) -> some View {
@@ -351,7 +359,7 @@ struct NavigationBarModifier: ViewModifier {
                 if !hideBack {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
-                            router.back()
+                            onBack?() ?? router.back()
                         } label: {
                             Image(systemName: "chevron.left")
                                 .foregroundColor(titleColor)
@@ -376,8 +384,8 @@ struct ScaleTransition: ViewModifier {
 }
 
 extension View {
-    func navigationBarCustom(title: String, titleColor: Color = .primary, hideBack: Bool = false) -> some View {
-        modifier(NavigationBarModifier(title: title, titleColor: titleColor, hideBack: hideBack))
+    func navigationBarCustom(title: String, titleColor: Color = .primary, hideBack: Bool = false, onBack: (() -> Void)? = nil) -> some View {
+        modifier(NavigationBarModifier(title: title, titleColor: titleColor, hideBack: hideBack, onBack: onBack))
     }
     
     func scaleTransitionCustom(isPresented: Bool) -> some View {

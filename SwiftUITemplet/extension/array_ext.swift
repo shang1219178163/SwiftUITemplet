@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-extension Array {
+public extension Array {
 
     /// 快速生成一个数组(step代表步长)
     init(count: Int, generator: @escaping ((Int) -> Element)) {
@@ -22,8 +22,8 @@ extension Array {
     }
  
     /// 将数组转换为字典，索引为键，元素为值
-     func asMap() -> [Int: Element] {
-        return Dictionary(uniqueKeysWithValues: self.enumerated().map { ($0.offset, $0.element) })
-     }
+    func asMap<Key: Hashable>(_ keyBlock: ((Int, Element) -> Key)? = nil) -> [Key: Element] where Key == String {
+        return Dictionary(uniqueKeysWithValues: enumerated().map { (keyBlock?($0.offset, $0.element) ?? "\($0.offset)", $0.element) })
+    }
 }
 
