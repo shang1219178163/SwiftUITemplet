@@ -9,5 +9,9 @@
 	</dict>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>需要访问您的位置信息以提供位置相关服务</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>需要访问您的位置信息以提供位置相关服务</string>
 </dict>
 </plist>

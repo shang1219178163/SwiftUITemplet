@@ -36,6 +36,7 @@ class AppRouter {
     static let notificationBannerView = "/notificationBannerView"
     static let fileHelperDemo = "/FileHelperDemo"
     static let modelCodablePage = "/modelCodablePage"
+    static let locationDemo = "/locationDemo"
 
     
     /// 路由
@@ -88,6 +89,8 @@ class AppRouter {
         (AppRouter.fileHelperDemo, { _ in AnyView(FileHelperDemo()) }, { _ in "文件选择" }),
 
         (AppRouter.modelCodablePage, { _ in AnyView(ModelCodablePage()) }, { _ in "模型解析" }),
+
+        (AppRouter.locationDemo, { _ in AnyView(LocationDemo()) }, { _ in "地图功能" }),
 
         
     ]

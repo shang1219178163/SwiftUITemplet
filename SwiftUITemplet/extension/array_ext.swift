@@ -21,5 +21,9 @@ extension Array {
         return Array(self[start...end])
     }
  
+    /// 将数组转换为字典，索引为键，元素为值
+     func asMap() -> [Int: Element] {
+        return Dictionary(uniqueKeysWithValues: self.enumerated().map { ($0.offset, $0.element) })
+     }
 }
 

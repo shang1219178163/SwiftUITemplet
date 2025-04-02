@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14248D182D9CC7AE00D1BAD1 /* LocationDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14248D172D9CC7AE00D1BAD1 /* LocationDemo.swift */; };
 		142CB9392A90CCF200CBD9F4 /* SwiftUITempletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142CB9382A90CCF200CBD9F4 /* SwiftUITempletApp.swift */; };
 		142CB93B2A90CCF200CBD9F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142CB93A2A90CCF200CBD9F4 /* ContentView.swift */; };
 		142CB93D2A90CCF400CBD9F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142CB93C2A90CCF400CBD9F4 /* Assets.xcassets */; };
@@ -121,6 +122,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		14248D172D9CC7AE00D1BAD1 /* LocationDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDemo.swift; sourceTree = "<group>"; };
 		142CB9352A90CCF200CBD9F4 /* SwiftUITemplet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUITemplet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142CB9382A90CCF200CBD9F4 /* SwiftUITempletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITempletApp.swift; sourceTree = "<group>"; };
 		142CB93A2A90CCF200CBD9F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 		144668E62D7040EF00204772 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				14248D172D9CC7AE00D1BAD1 /* LocationDemo.swift */,
 				14DF1FED2D9BE8C200C21C41 /* ModelCodablePage.swift */,
 				14F6FA3E2D96421600739191 /* NotificationBannerView.swift */,
 				14E4697E2D65931200B7372F /* TableViewExample.swift */,
@@ -626,6 +629,7 @@
 				14E469942D65E15D00B7372F /* GeometryReaderView.swift in Sources */,
 				14F8E3D72D7158BD00BA15A9 /* Router.swift in Sources */,
 				147766512D6473EA00458842 /* View_ext.swift in Sources */,
+				14248D182D9CC7AE00D1BAD1 /* LocationDemo.swift in Sources */,
 				14A3F2AF2D6DC47100DA08B4 /* DocumentPicker.swift in Sources */,
 				14FF9F722D6EE993004D0C81 /* PagerView.swift in Sources */,
 				1443F9512D83D2770089802E /* CircleLayout.swift in Sources */,
