@@ -9,6 +9,10 @@ public protocol BaseTypeCodable: Codable {
     static var defaultValue: Self { get }
 }
 
+extension Optional: BaseTypeCodable where Wrapped: BaseTypeCodable {
+  public static var defaultValue: Optional<Wrapped> { .none }
+}
+
 extension Int: BaseTypeCodable {
   public static var defaultValue: Int { 0 }
 }
@@ -25,9 +29,6 @@ extension Bool: BaseTypeCodable {
   public static var defaultValue: Bool { false }
 }
 
-extension Optional: BaseTypeCodable where Wrapped: BaseTypeCodable {
-  public static var defaultValue: Optional<Wrapped> { .none }
-}
 
 extension Dictionary: BaseTypeCodable where Value: BaseTypeCodable, Key: BaseTypeCodable {
   public static var defaultValue: Dictionary<Key, Value> { [:] }
