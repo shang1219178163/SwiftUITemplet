@@ -1,25 +1,24 @@
 import SwiftUI
 
 struct DataTypeDemo: View {
-    @State private var selectedTab = 0
+    @State private var selectedTab = 1
     
-    let tabItems: [(tag: Int, title: String, v: any View)] = [
-        (tag: 0, title: "基础类型", v: BasicTypesView()),
-        (tag: 1, title: "复杂类型", v: ComplexTypesView()),
-        (tag: 2, title: "类型测试", v: TypeTestView()),
+    let tabItems: [(title: String, v: AnyView)] = [
+        (title: "基础类型", v: AnyView(DataTypesView())),
+        (title: "类型测试", v: AnyView(DataTypeTestView())),
     ]
     
     var body: some View {
         VStack(spacing: 0) {
             // 顶部标签栏
             HStack(spacing: 0) {
-                ForEach(0..<tabItems.count) { index in
+                ForEach(tabItems.indices, id: \.self) { index in
                     Button(action: {
                         withAnimation {
                             selectedTab = index
                         }
                     }) {
-                        Text(tabItems[$selectedTab.wrappedValue].title)
+                        Text(tabItems[index].title)
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(selectedTab == index ? .blue : .gray)
                             .frame(maxWidth: .infinity)
@@ -37,26 +36,34 @@ struct DataTypeDemo: View {
             
             // 内容区域
             TabView(selection: $selectedTab) {
-                tabItems[0].v
-                    .tag(0)
-                
-                tabItems[1].v
-                    .tag(1)
-                
-                tabItems[2].v
-                    .tag(2)
+                ForEach(tabItems.indices, id: \.self) { i in
+                    tabItems[i].v
+                        .tag(i)
+                }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
-        .navigationTitle("数据类型")
+        .navigationBarCustom(title: "数据类型", onBack: {
+            DDLog("onBack")
+            Router.shared.back();
+        })
     }
 }
 
-// 基础类型视图
-struct BasicTypesView: View {
+/// 数据类型视图
+struct DataTypesView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
+                // 可选类型
+                TypeCard(title: "可选类型", content: {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Optional<String>: Optional(\"Hello\")")
+                        Text("Optional<Int>: Optional(42)")
+                        Text("Optional<Double>: Optional(3.14)")
+                    }
+                })
+                
                 // 整数类型
                 TypeCard(title: "整数类型", content: {
                     VStack(alignment: .leading, spacing: 10) {
@@ -95,25 +102,6 @@ struct BasicTypesView: View {
                     }
                 })
                 
-                // 可选类型
-                TypeCard(title: "可选类型", content: {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Optional<String>: Optional(\"Hello\")")
-                        Text("Optional<Int>: Optional(42)")
-                        Text("Optional<Double>: Optional(3.14)")
-                    }
-                })
-            }
-            .padding()
-        }
-    }
-}
-
-// 复杂类型视图
-struct ComplexTypesView: View {
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
                 // 数组
                 TypeCard(title: "数组", content: {
                     VStack(alignment: .leading, spacing: 10) {
@@ -188,33 +176,32 @@ struct ComplexTypesView: View {
 }
 
 
-// 复杂类型视图
-struct TypeTestView: View {
-    typealias VoidCallback = () -> Void
 
-//    lazy var items: [(name: String, action: () -> Void)] = [
-//        (name: "测试", action: onArray)
-//    ]
+/// 数据类型测试视图
+struct DataTypeTestView: View {
     
     func items() -> [(name: String, action: () -> Void)] {
         return [
-            (name: "测试", action: onArray)
+            (name: "Optional", action: onOptional),
+            (name: "Int", action: onInt),
+            (name: "Double", action: onDouble),
+            (name: "Bool", action: onBool),
+            (name: "String", action: onString),
+            (name: "Array", action: onArray),
+            (name: "Dictionary", action: onDictionary),
+            (name: "Set", action: onSet),
+            (name: "Tuple", action: onTuple),
         ]
     }
+    
     
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                buildWrap(items: items(), alignment: .leading, itemBgColor: Color.blue);
-
-                // 数组
-                TypeCard(title: "数组", content: {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("[Int]: [1, 2, 3, 4, 5]")
-                        Text("[String]: [\"A\", \"B\", \"C\"]")
-                        Text("[Double]: [1.1, 2.2, 3.3]")
-                    }
-                }) 
+                buildWrap(items: items(),
+                          alignment: .leading,
+                          itemBgColor: Color.blue
+                )
             }
             .padding()
         }
@@ -225,26 +212,16 @@ struct TypeTestView: View {
         alignment: HorizontalAlignment = .leading,
         itemBgColor: Color = .blue
     ) -> some View {
-        var enumString = ""
-        switch alignment {
-        case HorizontalAlignment.center:
-            enumString = "HorizontalAlignment.center"
-        case HorizontalAlignment.trailing:
-            enumString = "HorizontalAlignment.trailing"
-        default:
-            enumString = "HorizontalAlignment.leading"
-        }
-        
         return VStack(alignment: alignment, spacing: 10, content: {
-            Text("\(enumString)").font(.subheadline)
             Wrap(
                 spacing: 10,
                 runSpacing: 10,
                 alignment: alignment
             ) {
-                ForEach(0..<items.count) { i in
-                    let e = items[i];
-                    Text("选项_\(e.0)")
+                ForEach(0..<items.count) { index in
+                    let e = items[index];
+                    Text("\(e.0) 类型")
+                        .font(Font.system(size: 14))
                         .padding(EdgeInsets.symmetric(
                             horizontal: 8,
                             vertical: 4))
@@ -261,8 +238,48 @@ struct TypeTestView: View {
     }
     
     
+    func onOptional() -> Void {
+        DDLog("测试")
+    }
+    
+    func onInt() -> Void {
+        DDLog("测试")
+    }
+    
+    func onDouble() -> Void {
+        DDLog("测试")
+    }
+    
+    func onBool() -> Void {
+        DDLog("测试")
+    }
+    
+    func onString() -> Void {
+        DDLog("测试")
+    }
+    
     func onArray() -> Void {
+        DDLog("测试")
         
+        let array = ["A", "B", "C", "D"]
+        let mapped = array.asMap()
+        DDLog(mapped)
+        
+        
+        let customMapped = array.asMap { i, v in "index_\(i)" }
+        DDLog(customMapped)
+    }
+    
+    func onDictionary() -> Void {
+        DDLog("测试")
+    }
+    
+    func onSet() -> Void {
+        DDLog("测试")
+    }
+    
+    func onTuple() -> Void {
+        DDLog("测试")
     }
 }
 
@@ -278,7 +295,8 @@ struct TypeCard<Content: View>: View {
                 .foregroundColor(.blue)
             
             content()
-                .font(.system(.body, design: .monospaced))
+//                .font(.system(.body, design: .monospaced))
+                .font(.system(size: 14))
                 .foregroundColor(.primary)
         }
         .padding()
@@ -288,6 +306,7 @@ struct TypeCard<Content: View>: View {
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
 }
+
 
 #Preview {
     NavigationView {
