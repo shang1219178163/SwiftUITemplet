@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var router = Router.shared
-    
+    @State private var showDrawer = false
+
     /// 隐藏 TabBar
     var hideTabBar: Visibility {
         let result = router.path.isEmpty
@@ -18,7 +19,56 @@ struct ContentView: View {
 
     
     var body: some View {
-        TabView(selection: $router.selectedTab) {
+        ZStack(alignment: .leading, content: {
+            // 主界面内容
+             buildTabView()
+                .offset(x: showDrawer ? UIScreen.main.bounds.size.width * 0.75 : 0)
+                .disabled(showDrawer) // 禁用主界面交互
+                .animation(.easeInOut, value: showDrawer)
+            
+
+            // 点击遮罩关闭 Drawer
+            if showDrawer {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation {
+                            showDrawer.toggle()
+                        }
+                    }
+            }
+             
+             // 侧边栏菜单
+             if showDrawer {
+                 LeftDrawerView(width: UIScreen.main.bounds.size.width * 0.75)
+                     .transition(.move(edge: .leading))
+             }
+
+            // 顶部菜单按钮
+             VStack {
+                 if !showDrawer {
+                     HStack {
+                         Button(action: {
+                             withAnimation {
+                                 showDrawer.toggle()
+                             }
+                         }) {
+                             Image(systemName: "line.horizontal.3")
+                                 .font(.title)
+                                 .padding()
+                         }
+                         Spacer()
+                     }
+                 }
+                Spacer()
+            }
+        })
+
+    }
+        
+    
+    func buildTabView() -> some View {
+        return TabView(selection: $router.selectedTab) {
             NavigationStack(path: $router.path) {
                 TabHomeView()
                     .navigationBarCustom(title: "首页", hideBack: true)

@@ -92,9 +92,7 @@ class AppRouter {
         (AppRouter.fileHelperDemo, { _ in AnyView(FileHelperDemo()) }, { _ in "文件选择" }),
 
         (AppRouter.modelCodablePage, { _ in AnyView(ModelCodablePage()) }, { _ in "模型解析" }),
-
         (AppRouter.locationDemo, { _ in AnyView(LocationDemo()) }, { _ in "地图功能" }),
-
         (AppRouter.dataTypeDemo, { _ in AnyView(DataTypeDemo()) }, { _ in "数据类型" }),
 
     ]
@@ -325,6 +323,17 @@ class Router: ObservableObject {
     }
 }
 
+extension View {
+    func navigationBarCustom(title: String, titleColor: Color = .primary, hideBack: Bool = false, onBack: (() -> Void)? = nil) -> some View {
+        modifier(NavigationBarModifier(title: title, titleColor: titleColor, hideBack: hideBack, onBack: onBack))
+    }
+    
+    func scaleTransitionCustom(isPresented: Bool) -> some View {
+        modifier(ScaleTransition(isPresented: isPresented))
+    }
+}
+
+
 // 视图修饰器，用于添加导航标题和返回按钮
 struct NavigationBarModifier: ViewModifier {
     let title: String
@@ -383,12 +392,3 @@ struct ScaleTransition: ViewModifier {
     }
 }
 
-extension View {
-    func navigationBarCustom(title: String, titleColor: Color = .primary, hideBack: Bool = false, onBack: (() -> Void)? = nil) -> some View {
-        modifier(NavigationBarModifier(title: title, titleColor: titleColor, hideBack: hideBack, onBack: onBack))
-    }
-    
-    func scaleTransitionCustom(isPresented: Bool) -> some View {
-        modifier(ScaleTransition(isPresented: isPresented))
-    }
-} 
