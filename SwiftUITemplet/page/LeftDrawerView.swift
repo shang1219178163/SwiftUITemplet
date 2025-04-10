@@ -25,9 +25,9 @@ struct LeftDrawerView: View {
             Text("Menu Item 2")
             Spacer()
         }
-        .ignoresSafeArea()
+//        .ignoresSafeArea()
         .padding()
-        .frame(minWidth: width, maxHeight: .infinity)
+        .frame(minWidth: width, maxWidth: width, maxHeight: .infinity)
         .background(Color.white)
         .shadow(radius: 5)
         .border(Color.blue)
