@@ -7,6 +7,7 @@
 
 
 extension MainActor {
+    /// 安全方法
     static func runSafely<T: Sendable>(_ block: @MainActor () -> T) throws -> T {
         if Thread.isMainThread {
           return MainActor.assumeIsolated { block() }
